@@ -1,0 +1,10 @@
+.genre-checkbox {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.genre-checkbox label {
+    margin-left: 8px;
+    cursor: pointer;
+}

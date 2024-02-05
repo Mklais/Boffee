@@ -1,0 +1,265 @@
+/* HOMEPAGE */
+.header {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+    "header-row-1"
+    "header-row-2";
+
+}
+
+/* HEADER */
+
+.header-row-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 20px;
+
+    grid-area: header-row-1;
+}
+
+.header-row-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 25px;
+
+    grid-area: header-row-2;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.header span {
+    vertical-align: middle;
+}
+
+.day-style {
+    color: black;
+}
+
+.date-style {
+    color: #A9A9A9;
+}
+
+/* HOMEPAGE CONTAINER */
+
+.homepage-container{
+    background-color: rgba(245, 239, 230, 0.3);
+    border: solid 3px black;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+/* HOMEPAGE BUTTONS */
+
+.homepage-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 0px;
+    padding: 10px;
+}
+
+.homepage-buttons-header {
+    grid-column: span 3;
+    margin-bottom: 0px;
+
+    color: #A9A9A9;
+}
+
+.homepage-button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #3E3232;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.homepage-button-box a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.homepage-button-box:hover {
+    background-color: #E48F45;
+    cursor: pointer;
+}
+
+/* USERS */
+
+.users-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+
+    grid-template-areas:
+    "header header header"
+    "popular user user"
+    "card1 thoughts quote";
+
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.users-header {
+    grid-column: span 3; /* Spans across all columns */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 20px;
+    padding: 0px 40px;
+    color: black;
+
+    grid-area: header;
+}
+
+.users-header a {
+    text-decoration: none;
+}
+
+.popular-box {
+    background-color: #C9CCD5;
+    border-radius: 20px;
+    padding: 20px;
+    color: #333333;
+
+    height: 300px;
+
+    grid-area: popular;
+}
+
+/* User box */
+
+.user-box {
+    background-color: #C9CCD5;
+    border-radius: 20px;
+    padding: 20px;
+    color: black;
+
+    height: 300px;
+    grid-area: user;
+}
+
+.user-box-grid {
+    display: grid;
+    grid-template-rows: auto auto;
+
+    grid-template-areas:
+    "user-box-header"
+    "user-box-lower"
+}
+
+.user-box-header {
+    grid-area: user-box-header;
+}
+
+.user-box-lower {
+    grid-area: user-box-lower;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "user-emoji about-user"
+}
+
+.emoji-styles {
+    font-family: 'Noto Color Emoji';
+}
+
+.user-box-lower {
+
+    background:
+    linear-gradient(
+        65deg,
+        #E48F45 10%,
+        #C9CCD5 90%
+        );
+
+    border-radius: 20px;
+    height: 160px;
+}
+
+.user-emoji {
+    grid-area: user-emoji;
+
+    font-size: 75px;
+
+    display: inline-block;
+
+    width: 150px;
+    height: 150px;
+
+    line-height: 150px;
+    text-align: center;
+
+    margin-left: 40px;
+}
+
+.about-user {
+    grid-area: about-user;
+}
+
+.about-container {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+/* Latest book box */
+
+.card-box {
+    background-color: #C9CCD5;
+    border-radius: 20px;
+    padding: 20px;
+    color: #333333;
+
+    height: 300px;
+}
+
+/* Feedback box */
+
+.thoughts-box {
+    border-radius: 20px;
+    padding: 20px;
+    color: #333333;
+
+    height: 300px;
+    grid-area: thoughts;
+    background-color: #C9CCD5;
+}
+
+/* Quote box */
+
+.quote-box {
+    border-radius: 20px;
+    padding: 20px;
+    color: #333333;
+
+    height: 300px;
+    grid-area: quote;
+    background-color: #C9CCD5;
+}
+
+.uniform-color{
+    background-color: #C9CCD5;
+}
+
+/* Misc */

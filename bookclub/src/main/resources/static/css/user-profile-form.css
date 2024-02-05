@@ -1,0 +1,50 @@
+/* General Grid structure */
+
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    grid-template-areas:
+        "header"
+        "edit-form";
+}
+
+.header {
+    grid-area: header;
+}
+
+.profile-edit-form {
+    grid-area: edit-form;
+}
+
+/* Profile edit form grid structure */
+
+.profile-edit-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    grid-template-areas:
+        "about-area selection-area";
+}
+
+.about-area {
+    grid-area: about-area;
+}
+
+.selection-area {
+    grid-area: selection-area;
+}
+
+/* Misc */
+
+.birthdate-input {
+    width: 65px;
+
+    display:flex;
+}
+
+.birthdate-input .col-auto:not(:last-child) {
+    margin-right: 10px;
+}

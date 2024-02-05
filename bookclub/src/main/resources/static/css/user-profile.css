@@ -1,0 +1,92 @@
+.about {
+    border-radius: 20px;
+    padding: 20px;
+
+    background-color: #C9CCD5;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-areas:
+    "person-details emoji-data"
+
+}
+
+.user-details {
+    grid-area: person-details;
+}
+
+/* User emoji */
+
+.emoji {
+    grid-area: emoji-data;
+}
+
+.bookworm-emoji {
+    font-size: 100px;
+
+     display: inline-block;
+     width: 200px;
+     height: 200px;
+     line-height: 200px;
+     text-align: center;
+     border-radius: 50%;
+
+     background: linear-gradient(
+     65deg,
+     #FFCF81 10%,
+     #e0e0e0 100%
+     );
+}
+
+.emoji-styles {
+    font-family: 'Noto Color Emoji';
+}
+
+/* Data section */
+
+.data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.label-data {
+    margin-bottom: 10px;
+}
+
+/* Misc */
+
+hr {
+    width: 75%;
+}
+
+#separator-50 {
+    width: 50%;
+}
+
+.separator-25 {
+    width: 25%;
+    border: 2px solid;
+}
+
+.edit-button {
+    margin-left: 10px;
+
+}
+
+.btn-friendship {
+    display: flex;
+    align-items: center;
+}
+
+.btn-friendship span {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+/* About me */
+
+.about-me-header {
+    margin-bottom: 10px;
+}

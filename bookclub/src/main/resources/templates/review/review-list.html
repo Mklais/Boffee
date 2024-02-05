@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="list-container">
+        <div class="logo-heading-container">
+            <h1 class="font-700">
+                Review Directory
+                <span class="material-symbols-outlined">reviews</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="navigation-buttons">
+            <!-- Button for returning to homepage -->
+            <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
+                Return to homepage
+            </a>
+
+            <!-- Button for adding books -->
+            <a th:href="@{/reviews/addForm}" class="btn btn-primary btn-sm mb-3">
+                Share a Review
+            </a>
+        </div>
+
+        <div class="viewBy">
+            <h4 class="font-400">
+                <label for="reviewer" class="form-label">View reviews by:</label>
+            </h4>
+
+            <div class="form-group">
+                <form th:action="@{/reviews/listByReviewer}" method="get">
+                    <select id="reviewer" name="reviewerId" class="form-select mb-4 w-75" required>
+                        <option value="" disabled selected>Select a reviewer</option>
+                        <option th:each="reviewer : ${reviewers}"
+                                th:value="${reviewer.id}"
+                                th:text="${reviewer.firstName + ' ' + reviewer.lastName}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm mb-3 btn-viewBy">
+                        View
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <table class="table rounded-4 overflow-hidden table-bordered table-striped">
+            <thead class="table-dark">
+
+                <tr>
+                    <th>Book Title</th>
+                    <th>Comment</th>
+                    <th>Reviewer</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr th:each="review : ${reviews}">
+                    <td th:text="${review.book.title}"></td>
+                    <td th:text="${review.comment}"></td>
+                    <td th:text="${review.reviewer.firstName + ' ' + review.reviewer.lastName}"></td>
+
+                    <!-- Action buttons -->
+                    <td class="actions-column">
+                        <div class="action-buttons">
+                            <!-- Button for update -->
+                            <a th:href="@{/reviews/updateForm(reviewId=${review.id})}" class="btn btn-info btn-sm">
+                                <span class="material-symbols-outlined">edit</span>
+                            </a>
+                            <!-- Button for delete -->
+                            <a th:href="@{/reviews/delete(reviewId=${review.id})}" class="btn btn-danger btn-sm"
+                               onclick="if (!(confirm('Are you sure you want to delete this review?'))) return false">
+                                <span class="material-symbols-outlined">delete</span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

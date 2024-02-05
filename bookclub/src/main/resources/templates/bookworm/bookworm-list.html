@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookworm Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo-heading-container">
+        <h1>
+            Bookworm Directory
+            <span class="material-symbols-outlined">account_box</span>
+        </h1>
+    </div>
+
+    <hr>
+
+    <div class="navigation-buttons">
+
+        <!-- Button for returning to homepage -->
+        <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
+            Return to homepage
+        </a>
+
+    </div>
+
+    <table class="table table-sm rounded-4 overflow-hidden table-bordered table-striped">
+        <thead class="table-dark">
+
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Emoji</th>
+                <th>Hobby</th>
+                <th>Favorite Genre</th>
+                <th>Favorite Author</th>
+                <th>Latest Read Book</th>
+                <th>Activity Points</th>
+                <th>Join Date</th>
+                <th class="actions-column">Actions</th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <tr th:each="bookworm : ${bookworms}">
+                <td th:text="${bookworm.username}"></td>
+                <td th:text="${bookworm.firstName}"></td>
+                <td th:text="${bookworm.lastName}"></td>
+                <td th:text="${bookworm.email}"></td>
+                <td th:text="${bookworm.emoji}"></td>
+                <td th:text="${bookworm.hobby}"></td>
+                <td th:text="${bookworm.favoriteGenre.name}"></td>
+                <td th:text="${bookworm.favoriteAuthor.firstName + ' ' + bookworm.favoriteAuthor.lastName}"></td>
+                <td>
+                    <ul th:if="${bookworm.readBooks != null}">
+                        <li th:each="readBook : ${bookworm.readBooks}" th:text="${readBook.title}"></li>
+                    </ul>
+                </td>
+                <td th:text="${bookworm.activityPoints}"></td>
+                <td th:text="${bookworm.joinDate}"></td>
+
+                <!-- Action buttons -->
+                <td class="actions-column">
+                    <!-- Button for update -->
+                    <a th:href="@{/bookworms/updateForm(bookwormId=${bookworm.id})}" class="btn btn-info btn-sm">
+                        <span class="material-symbols-outlined">edit</span>
+                    </a>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <hr>
+
+</div>
+
+</body>
+</html>

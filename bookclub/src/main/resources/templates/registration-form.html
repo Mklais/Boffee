@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Boffee - Sign up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/registration.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="login-page">
+
+        <div class="form-container">
+            <header class="header">
+                <h1 class="font-700">
+                    Boffee - Sign Up
+                </h1>
+            </header>
+
+            <hr>
+
+            <div class="login-form">
+                <div class="empty"></div>
+                <div class="login-form-box">
+                    <h4 class="login-form-header font-400">
+                        Please sign up
+                        <span class="material-symbols-outlined">person_add</span>
+                    </h4>
+
+                    <form action="#"
+                          th:action="@{/registration/save}"
+                          th:object="${user}" method="POST">
+
+                        <input type="hidden" th:field="*{userId}">
+
+                        <input type="hidden" th:field="*{active}">
+
+                        <input type="hidden" th:field="*{activityPoints}">
+
+                        <input type="hidden" th:field="*{emoji}">
+
+                        <div class="form-group">
+                            <!-- Username & password -->
+                            <div class="form-group-sub">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" th:field="*{username}" required/>
+                            </div>
+                            <div class="form-group-sub">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" th:field="*{password}" required/>
+                            </div>
+                            <!-- Second password for verification -->
+                            <div class="form-group-sub">
+                                <label for="passwordVerify">Verify Password:</label>
+                                <input type="password" id="passwordVerify" name="passwordVerify"/>
+                            </div>
+                            <!-- Personal information -->
+                            <div class="form-group-sub">
+                                <label for="firstName">First name:</label>
+                                <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required/>
+                            </div>
+                            <div class="form-group-sub">
+                                <label for="lastName">Last name:</label>
+                                <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required/>
+                            </div>
+                            <div class="form-group-sub">
+                                <label for="email">Email:</label>
+                                <input type="text" id="email" name="email" th:field="*{email}" required/>
+                            </div>
+                            <!-- Emoji will be set default "1" -->
+                            <!-- Emoji -->
+                            <!-- Activity Points will be set default "0" -->
+                            <!-- Activity Points -->
+                        </div>
+                        <input type="submit" value="Sign Up"/>
+                    </form>
+
+                    <hr>
+
+                    <p>Already have an account?</p><a class="login-link" th:href="@{/loginForm}">Sign In</a>
+
+                    <!-- Error handler -->
+                    <div class="error-handler" th:if="${error}">
+                        <p class="font-400">
+                            <span style="color: red" th:text="${error}"></span>
+                        </p>
+                    </div>
+
+
+                </div>
+                <div class="empty"></div>
+            </div>
+
+            <br><hr>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

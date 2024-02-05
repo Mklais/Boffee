@@ -1,0 +1,123 @@
+html, body {
+    margin: 0;
+}
+
+body {
+/* This is what i call Coffee Hombre */
+    background: linear-gradient(
+        65deg,
+        #6B240C 1%,
+        #994D1C 5%,
+        #E48F45 20%,
+        #3E3232 45%,
+
+        #3E3232 55%,
+        #503C3C 65%,
+        #E48F45 68%,
+        #3E3232 80%,
+
+        #503C3C 85%,
+        #E48F45 93%,
+        #6B240C 100%
+    );
+
+    color: #black;
+    padding: 20px;
+
+    font-family: 'Roboto', sans-serif;
+
+    min-height: 100vh;
+}
+
+/* Form settings */
+
+.actions-column {
+    width: 120px;
+    text-align: center;
+}
+
+.user-action-column {
+    width: 160px;
+    text-align: center;
+}
+
+.action-column .action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.user-action-column .action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.homepage #material-symbols-outlined {
+    font-size: 50px;
+}
+
+.friendship-action-column {
+    width: 120px;
+}
+
+.friendship-action-column .action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    gap: 5px;
+}
+
+    /* Form settings */
+    /* ViewBy Group */
+
+.viewBy .form-group,
+.viewBy form {
+    display: flex;
+    align-items: center;
+}
+
+.btn-viewBy {
+    margin-left: 10px;
+}
+
+    /* viewBy Alert settings */
+
+.viewBy-alert{
+    background-color: #3E3232;
+    border-color: #E48F45;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Container settings */
+
+.list-container {
+    background-color: rgba(245, 239, 230, 0.3);
+    border: solid 3px black;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: rgba(245, 239, 230, 0.3);
+    border: solid 3px black;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+/* Error handler */
+
+.error-handler {
+    margin-top: 10px;
+    padding: 0px;
+    border: 1px solid red;
+    background-color: #ffebee;
+    border-radius: 5px;
+
+    text-align: center;
+}

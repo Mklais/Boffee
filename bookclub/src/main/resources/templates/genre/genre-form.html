@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Genre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="form-container">
+        <div class="logo-heading-container">
+            <h1 class="font-700">
+                Genre Directory
+                <span class="material-symbols-outlined">view_cozy</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="logo-edit-container">
+            <h4 class="h4 mb-4 font-400">
+                Edit Genre
+                <span class="material-symbols-outlined">edit</span>
+            </h4>
+        </div>
+
+        <!-- Duplicate handling -->
+        <div th:if="${errorMessage}" class="alert alert-danger rounded-pill text-center" role="alert" style="font-size: 14px;">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <form th:action="@{/genres/save}"
+              th:object="${genre}" method="POST">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <input type="text" th:field="*{name}"
+                   class="form-control mb-4 w-25" placeholder="Genre name" required>
+
+<!--            <input type="hidden" name="redirectToBooks" th:value="${redirectToBooks}" />-->
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+
+        </form>
+        <hr>
+
+        <a th:href="@{/genres/list}">Back to Genres List</a>
+    </div>
+
+</div>
+
+</body>
+</html>

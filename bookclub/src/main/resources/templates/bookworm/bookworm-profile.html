@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookworm Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="stylesheet" type="text/css" href="/css/bookworm-profile.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="bookworm-profile">
+        <div class="logo-heading-container">
+            <h1>
+                Bookworm Directory
+                <span class="material-symbols-outlined">account_box</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="navigation-buttons">
+            <!-- Button for returning to homepage -->
+            <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
+                Return to homepage
+            </a>
+            <!-- Button for returning to users list -->
+            <a th:href="@{/users/list}" class="btn btn-primary btn-sm mb-3">
+                Return to users list
+            </a>
+            <!-- Button for editing user -->
+            <a th:if="${loggedInUser == theBookworm.username}"
+               th:href="@{/bookworms/updateForm(bookwormId=${theBookworm.id})}"
+               class="btn btn-primary btn-sm mb-3">
+                Edit your profile
+            </a>
+        </div>
+
+        <div class="about">
+            <div class="user-details">
+                <div>
+                    <label>
+                        <h4 class="font-400"><u>Person Details</u></h4>
+                    </label>
+                </div>
+
+                <!-- Name & basic data -->
+                <div>
+                    <p class="font-400-18" th:text="${theBookworm.firstName + ' ' + theBookworm.LastName}" readonly></p>
+                    <p class="font-400-18" th:text="${theBookworm.email}" readonly></p>
+                </div>
+                <div class="user-additional">
+                    <label><u>About you:</u></label><br>
+                    <label>Favorite hobby:</label>
+                    <p class="font-400-18" th:text="${theBookworm.hobby}" readonly></p>
+                    <label>Favorite genre:</label>
+                    <p class="font-400-18" th:text="${theBookworm.favoriteGenre.name}" readonly></p>
+                    <label>Favorite author:</label>
+                    <p class="font-400-18" th:text="${theBookworm.favoriteAuthor.firstName + ' ' + theBookworm.favoriteAuthor.lastName}" readonly></p>
+                    <label>Read books:</label>
+                    <span>
+                        <ul>
+                            <li th:each="book : ${theBookworm.readBooks}" th:text="${book.title}"></li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="emoji-data">
+                <div class="bookworm-emoji" th:switch="${theBookworm.emoji}">
+                    <span th:case="1" class="emoji-styles">&#x1F60A;</span>
+                    <span th:case="2" class="emoji-styles">&#x1F60E;</span>
+                    <span th:case="3" class="emoji-styles">&#x1F913;</span>
+                    <span th:case="4" class="emoji-styles">&#x1F607;</span>
+                    <span th:case="5" class="emoji-styles">&#x1F9D0;</span>
+                    <span th:case="*" class="emoji-styles">&#x1F60A;</span>
+                </div>
+                <hr>
+                <div class="data">
+                    <label>Activity points:</label>
+                    <p class="font-400-18" th:text="${theBookworm.activityPoints}" readonly></p>
+                    <label>Join Date:</label>
+                    <p class="font-400-18" th:text="${theBookworm.joinDate}" readonly></p>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+    </div>
+
+</div>
+
+</body>
+</html>

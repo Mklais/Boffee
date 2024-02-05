@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="icon" type="image/png" href="images/book-favicon.png">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="list-container">
+        <div class="logo-heading-container">
+            <h1 class="font-700">
+                Book Directory
+                <span class="material-symbols-outlined">import_contacts</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="navigation-buttons">
+            <!-- Button for returning to homepage -->
+            <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
+                Return to homepage
+            </a>
+
+            <!-- Button for returning to reviews list -->
+            <a th:href="@{/books/list}" class="btn btn-primary btn-sm mb-3">
+                Return to books list
+            </a>
+        </div>
+
+        <div class="viewBy">
+            <h4 class="font-400">
+                <label for="author" class="form-label">View books by:</label>
+            </h4>
+
+            <div class="form-group">
+                <form th:action="@{/books/listByAuthor}" method="get">
+                    <select id="author" name="authorId" class="form-select mb-4 w-75" required>
+                        <option value="" disabled selected>Select an author</option>
+                        <option th:each="authorOption : ${authors}"
+                                th:value="${authorOption.id}"
+                                th:selected="${author.id eq authorOption.id}">
+                            <span th:text="${authorOption.firstName + ' ' + authorOption.lastName}"></span>
+                        </option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm mb-3 btn-viewBy">
+                        View
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <th:block th:if="${not #lists.isEmpty(books)}">
+            <table class="table rounded-4 overflow-hidden table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Genre</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over books and display information -->
+                    <tr th:each="book : ${books}">
+                        <td th:text="${book.title}"></td>
+                        <td>
+                            <ul th:if="${book.genres != null}">
+                                <li th:each="genre : ${book.genres}" th:text="${genre.name}"></li>
+                            </ul>
+                        </td>
+
+                        <!-- Action buttons -->
+                        <td class="actions-column">
+                            <div class="action-buttons">
+                                <!-- Button for delete -->
+                                <a th:href="@{/books/delete(bookId=${book.id})}" class="btn btn-danger btn-sm"
+                                   onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </th:block>
+
+        <!-- Display message if no books are available -->
+        <div th:if="${#lists.isEmpty(books)}"
+             class="alert viewBy-alert text-center"
+             role="alert">
+            <span th:text="${author.firstName + ' ' + author.lastName}" style="center"></span> has not published any books yet.
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-container">
+        <div class="logo-heading-container">
+            <h1 class="font-700">
+                Review Directory
+                <span class="material-symbols-outlined">reviews</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="logo-edit-container">
+            <h4 class="h4 mb-4 font-400">
+                Edit review
+                <span class="material-symbols-outlined">edit</span>
+            </h4>
+        </div>
+
+        <div class="form">
+
+            <form action="#"
+                  th:action="@{/reviews/save}"
+                  th:object="${review}" method="POST">
+
+                <input type="hidden" th:field="*{id}" />
+
+                <!-- Row for Reviewer and the reviewable book dropdowns -->
+                <div class="row mb-4">
+
+                    <!-- Reviewer dropdown column -->
+                    <div class="col-md-6">
+                        <label for="reviewer" class="form-label" >Select Reviewer:</label>
+                        <select id="reviewer" name="reviewer.id" class="form-select mb-4 w-50">
+                            <option th:each="reviewer : ${reviewers}"
+                                    th:value="${reviewer.id}"
+                                    th:text="${reviewer.firstName + ' ' + reviewer.lastName}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Book dropdown column -->
+                    <div class="col-md-6">
+                        <label for="book" class="form-label" >Select a book to criticise:</label>
+                        <select id="book" name="bookId" class="form-select mb-4 w-50">
+                            <option th:each="book : ${books}"
+                                    th:value="${book.id}"
+                                    th:text="${book.title}"></option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Row for Review of the book input -->
+                <div class="row mb-4">
+
+                    <div class="col-md-12">
+                        <input type="text" th:field="*{comment}"
+                               class="form-control mb-4 w-50" placeholder="Review of the book" required>
+
+                        <!-- Add a like/dislike || Recommend or not button -->
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-info col-2">Save</a></button>
+
+            </form>
+
+        </div>
+
+        <hr>
+
+        <a th:href="@{/reviews/list}">Back to Reviews List</a>
+    </div>
+
+</div>
+
+</body>
+</html>

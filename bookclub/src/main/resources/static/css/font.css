@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap');
+
+.font-100 {
+    font-weight: 100;
+}
+
+.font-300 {
+    font-weight: 300;
+}
+
+.font-500 {
+    font-weight: 500;
+}
+
+h1.font-500 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+}
+
+h1.font-700 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+}
+
+h2.font-500 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: black;
+}
+
+h3.font-500 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+h3.font-300 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+}
+
+.h3-action:hover {
+    color: #E48F45;
+    cursor: pointer;
+}
+
+h4.font-100 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 18px;
+}
+
+h4.font-300 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+h4.font-400 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+h4.font-500 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+h4.card-font {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+p.font-300-16 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #E48F45;
+}
+
+p.font-400-18 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #000000;
+}
+
+p.font-400-24 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+
+p.quote {
+    font-family: 'Kalam', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+a {
+    color: black;
+    text-decoration: underline;
+    transition: color 0.1s;
+}
+
+a:hover {
+    color: #E48F45;
+}
+

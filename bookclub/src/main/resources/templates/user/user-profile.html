@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="stylesheet" type="text/css" href="/css/user-profile.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="list-container">
+        <div class="logo-heading-container">
+            <h1 class="font-700">
+                User Profile
+                <span class="material-symbols-outlined">user_attributes</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="navigation-buttons d-flex justify-content-between">
+            <div>
+                <!-- Button for returning to homepage -->
+                <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
+                    Return to homepage
+                </a>
+                <!-- Button for returning to users list -->
+                <a th:href="@{/users/list}" class="btn btn-primary btn-sm mb-3">
+                    Return to users list
+                </a>
+                <!-- Button for viewing friends -->
+                <a th:if="${loggedInUser == theUser.username}"
+                   th:href="@{'/friends/list/profile/' + ${theUser.username}}"
+                   class="btn btn-success btn-sm mb-3">
+                    View & manage friends
+                </a>
+            </div>
+
+            <div class="ml-auto" th:if="${loggedInUser != theUser.username}">
+                <div th:switch="${friendshipStatus.toString()}">
+                    <!-- If not friends, show Add Friend button -->
+                    <form th:case="'NOT_FRIENDS'"
+                          th:action="@{/friends/send}"
+                          method="post"
+                          onsubmit="showFriendAddedMessage()">
+                        <input type="hidden" name="receiverId"
+                               th:value="${theUser.userId}" />
+                        <button type="submit" class="btn btn-success btn-sm mb-3 btn-friendship">
+                            Add this bookworm as your friend
+                            <span class="material-symbols-outlined">person_add</span>
+                        </button>
+                    </form>
+                    <!-- If the request is pending, show a disabled button with a message -->
+                    <a th:case="'PENDING'"
+                       class="btn btn-warning btn-sm mb-3 btn-friendship"
+                       disabled>
+                        Friendship request is pending
+                        <span class="material-symbols-outlined">pending</span>
+                    </a>
+                    <!-- If they are friends, show a disabled button with a message -->
+                    <a th:case="'ACCEPTED'"
+                       class="btn btn-info btn-sm mb-3 btn-friendship"
+                       disabled>
+                        Friends
+                        <span class="material-symbols-outlined">group</span>
+                    </a>
+                    <!-- Default case, you can add more cases if needed -->
+                    <a th:case="*"
+                       class="btn btn-secondary btn-sm mb-3 btn-friendship"
+                       disabled>
+                        Unknown Status
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="about">
+            <div class="user-details">
+                <div>
+                    <label>
+                        <h3 class="font-400"><u>Profile information</u></h3>
+                    </label>
+
+                    <!-- Button for editing user -->
+                    <a th:if="${loggedInUser == theUser.username}"
+                       th:href="@{/users/updateForm(userId=${theUser.userId})}"
+                       class="btn btn-info btn-sm edit-button">
+                        <span class="material-symbols-outlined">edit</span>
+                    </a>
+                </div>
+
+                <!-- Name & basic data -->
+                <div>
+                    <label>Name:</label>
+                    <p class="font-400-18" th:text="${theUser.firstName + ' ' + theUser.LastName}" readonly></p>
+                    <label>Email:</label>
+                    <p class="font-400-18" th:text="${theUser.email}" readonly></p>
+                </div>
+                <hr>
+                <!-- Interests & hobbies -->
+                <div class="about-me-header">
+                    <label><h4 class="font-400"><u>About me</u></h4></label>
+
+                    <!-- Button for updating interests & hobbies -->
+                    <a th:if="${loggedInUser == theUser.username}"
+                       th:href="@{/about/edit(userId=${theUser.userId})}"
+                       class="btn btn-info btn-sm edit-button">
+                        <span class="material-symbols-outlined">edit</span>
+                    </a>
+                </div>
+
+                <div class="about-me">
+                    <!-- Hobbies & interests -->
+                    <div th:if="${theProfile.hobbies != null || theProfile.interests != null}">
+                        <label><h4 class="font-500">Interests & hobbies</h4></label>
+                        <p class="font-400-18">
+                            <span th:if="${theProfile.hobbies != null}" th:text="${theProfile.hobbies}"></span>
+                            <span th:if="${theProfile.hobbies != null && theProfile.interests != null}"> & </span>
+                            <span th:if="${theProfile.interests != null}" th:text="${theProfile.interests}"></span>
+                        </p>
+                    </div>
+                    <!-- User Birthdate -->
+                    <div th:if="${theProfile.birthdate != null}">
+                        <label><h4 class="font-500">Birthday:</h4></label>
+                        <p class="font-400-18" th:text="${theProfile.birthdate}"></p>
+                    </div>
+
+                    <!-- User Favorites -->
+                    <div th:if="${theProfile.favoriteGenre != null || theProfile.favoriteAuthor != null}">
+                        <label><h4 class="font-500">Favorites</h4></label>
+                        <p class="font-400-18">
+                            <span th:if="${theProfile.favoriteGenre != null}" th:text="${theProfile.favoriteGenre.name}"></span>
+                            <span th:if="${theProfile.favoriteGenre != null && theProfile.favoriteAuthor != null}"> & </span>
+                            <span th:if="${theProfile.favoriteAuthor != null}" th:text="${theProfile.favoriteAuthor.firstName + ' ' + theProfile.favoriteAuthor.lastName}"></span>
+                        </p>
+                    </div>
+                    <div th:if="${loggedInUser == theUser.username}">
+                        <div th:if="${theProfile.favoriteGenre == null && theProfile.favoriteAuthor == null && (theProfile.hobbies == null && theProfile.interests == null)}">
+                            <p class="font-400-18">It's a little quiet in here..</p>
+                        </div>
+                    </div>
+
+                    <!-- Read & recommended books -->
+                    <div th:if="${theProfile.hasReadBooks() || theProfile.hasRecommendedBooks()}">
+                        <label><h4 class="font-500">Read & Recommended Books</h4></label>
+                        <!-- Read Books ul -->
+                        <div th:if="${theProfile.hasReadBooks()}">
+                            <ul th:if="${theProfile.hasReadBooks()}">
+                                <li th:each="book : ${theProfile.readBooks}">
+                                    <span style="font-family: 'Noto Color Emoji'; color: green;">&#x2705;</span>
+                                    <span th:text="${book.title}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Recommended Books -->
+                        <div th:if="${theProfile.hasRecommendedBooks()}">
+                            <hr id="separator-50">
+                            <ul th:if="${theProfile.hasRecommendedBooks()}">
+                                <li th:each="book : ${theProfile.recommendedBooks}">
+                                    <span style="font-family: 'Noto Color Emoji';">&#x2B50;</span>
+                                    <span th:text="${book.title}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- If logged-in user doesn't have read || recommended books -->
+                    <div th:if="${loggedInUser == theUser.username}">
+                        <div th:if="${theProfile.hasReadBooks() || theProfile.hasRecommendedBooks()}">
+                            <!-- Content when there are books -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Emoji & data about the authority and activity points -->
+            <div class="emoji-data">
+                <div class="bookworm-emoji" th:switch="${theUser.emoji}">
+                    <span th:case="1" class="emoji-styles">&#x1F60A;</span>
+                    <span th:case="2" class="emoji-styles">&#x1F60E;</span>
+                    <span th:case="3" class="emoji-styles">&#x1F913;</span>
+                    <span th:case="4" class="emoji-styles">&#x1F607;</span>
+                    <span th:case="5" class="emoji-styles">&#x1F9D0;</span>
+                    <span th:case="*" class="emoji-styles">&#x1F60A;</span>
+                </div>
+                <hr>
+                <div class="data">
+                    <label>Activity points:</label>
+                    <p class="font-400-18" th:text="${theUser.activityPoints}" readonly />
+                    <label>Highest authority:</label>
+                    <div class="authority-data">
+                        <p class="font-400-18" th:text="${authorityRank}" readonly />
+                        <!-- If the user profile is not matching with the logged-in user, the upgrade button is not shown -->
+                        <div th:if="${loggedInUser == theUser.username}">
+                            <!-- Green Button: Show if the user is eligible for an upgrade and does not already have the target authority -->
+                            <a th:if="${eligibleForUpgrade and !alreadyUpgraded}"
+                               th:href="@{/authority/upgrade}" class="btn btn-success btn-sm mb-3"
+                               onclick="showUpgradeNotification()">
+                                Upgrade role
+                            </a>
+
+                            <!-- Grey Disabled Button: Show if the user is not eligible for an upgrade and does not already have the target authority -->
+                            <a th:if="${!eligibleForUpgrade and !alreadyUpgraded}" class="btn btn-secondary btn-sm mb-3" disabled>
+                                Upgrade role
+                            </a>
+
+                            <!-- Message for Collecting Points: Display only if user does not already have the target authority -->
+                            <p th:if="${!alreadyUpgraded}" class="font-300-16">Collect 200 activity points to upgrade!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function showUpgradeNotification() {
+        alert('Upgrade successful!');
+    }
+
+    function showFriendAddedMessage() {
+        alert('Friend request sent successfully!');
+    }
+    /*]]>*/
+</script>
+
+</body>
+</html>

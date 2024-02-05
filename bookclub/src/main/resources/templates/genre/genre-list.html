@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Genre Directory</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Genre Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+<body>
+
+<div class="container">
+
+    <div class="list-container">
+        <div class="logo-heading-container">
+            <h1 class="font-700">
+                Genre Directory
+                <span class="material-symbols-outlined">view_cozy</span>
+            </h1>
+        </div>
+
+        <hr>
+
+        <div class="navigation-buttons">
+
+            <!-- Button for returning to homepage -->
+            <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
+                Return to homepage
+            </a>
+
+            <!-- Button for adding a genre -->
+            <a th:href="@{/genres/addForm}" class="btn btn-primary btn-sm mb-3">
+                Add Genre
+            </a>
+
+        </div>
+
+        <table class="table rounded-4 overflow-hidden table-bordered table-striped">
+
+            <thead class="table-dark">
+            <tr>
+                <th>Genre</th>
+                <th>Books</th>
+                <th class="actions-column">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="genre : ${genres}">
+                    <td th:text="${genre.name}"></td>
+                    <td>
+                        <!-- Check if the books list is null or empty -->
+                        <span th:if="${genre.books == null or #lists.isEmpty(genre.books)}"
+                              style="color: red;">No books have been added to this genre yet</span>
+
+                        <ul th:if="${genre.books != null}">
+                            <li th:each="book : ${genre.books}"
+                                th:text="${book.title}"></li>
+                        </ul>
+                    </td>
+
+                    <!-- Action buttons -->
+                    <td class="actions-column">
+                        <div class="action-buttons">
+
+                            <!-- Update button -->
+                            <a th:href="@{/genres/updateForm(genreId=${genre.id})}" class="btn btn-info btn-sm">
+                                <span class="material-symbols-outlined">edit</span>
+                            </a>
+
+                            <!-- Delete button -->
+                            <a th:href="@{/genres/delete(genreId=${genre.id})}" class="btn btn-danger btn-sm"
+                               onclick="return confirmDeleteGenre()">
+                                <span class="material-symbols-outlined">delete</span>
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    function confirmDeleteGenre() {
+        const message = `Are you sure you want to delete this genre?
+This action cannot be undone!
+
+Upon deleting:
+- All associations with the genre will be removed.`;
+        return confirm(message);
+    }
+</script>
+
+</body>
+</html>

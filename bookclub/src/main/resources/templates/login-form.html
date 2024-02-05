@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Boffee - Sign in</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/icons.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="login-page">
+
+        <div class="form-container">
+            <header class="header">
+                <h1 class="font-700">
+                    Boffee - Sign in
+                </h1>
+            </header>
+
+            <hr>
+
+            <div class="login-form">
+                <div class="empty"></div>
+                <div class="login-form-box">
+                    <h4 class="login-form-header font-400">
+                        Please sign in
+                        <span class="material-symbols-outlined">login</span>
+                    </h4>
+
+                    <form action="#" th:action="@{/authenticateTheUser}" method="POST">
+                        <div class="form-group">
+                            <div class="form-group-sub">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username"/>
+                            </div>
+                            <div class="form-group-sub">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password"/>
+                            </div>
+                        </div>
+                        <input type="submit" value="Sign in"/>
+
+                    </form>
+
+                    <hr>
+
+                    <p>Do not have an account?</p>
+                    <a class="registration-link" th:href="@{/registration/form}">Register</a>
+
+                    <!-- Display error message -->
+                    <div class="error-handler" th:if="${param.error}">
+                        <p class="font-400-16">
+                            <span style="color: red">Invalid username or password</span>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="empty"></div>
+            </div>
+
+            <br><hr>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

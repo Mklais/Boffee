@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Boffee - Homepage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="images/book-favicon.png">
+    <link rel="stylesheet" type="text/css" href="/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/factory.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    /* Check if feedbackSuccess flag is set, then show the popup */
+    var feedbackSuccess = [[${feedbackSuccess}]];
+    if (feedbackSuccess) {
+        alert("Feedback submitted successfully!");
+    }
+    /*]]>*/
+</script>
+<style>
+    .homepage-buttons a {
+        display: inline-block;
+        margin-right: 20px;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="homepage">
+        <div class="homepage-container">
+
+            <header class="header">
+                <!-- Logo & logout -->
+                <div class="header-row-1">
+                    <h1 class="font-700">
+                        <span>&#128214;</span>
+                        Boffee
+                        <span>&#9749;</span>
+                    </h1>
+                    <a th:href="@{/logout}">
+                        <h3 class="h3-action font-500">
+                            Log out
+                            <span class="material-symbols-outlined">logout</span>
+                        </h3>
+                    </a>
+                </div>
+                <!-- Date & user -->
+                <div class="header-row-2 font-500">
+                    <p>
+                        <span th:text="${dayOfWeek}" class="day-style"></span>
+                        <span th:text="' ' + ${formattedDate}" class="date-style"></span>
+                    </p>
+                    <div th:if="${loggedInUser.isPresent()}">
+                        <p>Howdy,
+                            <a th:href="@{'/users/profile/' + ${loggedInUser.get().getUsername()}}"
+                               style="text-decoration: underline; color: black;"
+                               onmouseover="this.style.color='#E48F45'"
+                               onmouseout="this.style.color='black'">
+                                <u th:text="${loggedInUser.get().getUsername()}"></u>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <hr>
+
+            <div class="homepage-buttons">
+                <h4 class="homepage-buttons-header font-500">View:</h4>
+
+                <div class="homepage-button-box" onclick="window.location.href='/books/list';">
+                    <h3>
+                        <span class="material-symbols-outlined">import_contacts</span>
+                        Books
+                    </h3>
+                </div>
+
+                <div class="homepage-button-box" onclick="window.location.href='/genres/list';">
+                    <h3>
+                        <span class="material-symbols-outlined">view_cozy</span>
+                        Genres
+                    </h3>
+                </div>
+
+                <div class="homepage-button-box" onclick="window.location.href='/authors/list';">
+                    <h3>
+                        <span class="material-symbols-outlined">signature</span>
+                        Authors
+                    </h3>
+                </div>
+
+                <div class="homepage-button-box" onclick="window.location.href='/reviewers/list';">
+                    <h3>
+                        <span class="material-symbols-outlined">person_edit</span>
+                        Reviewers
+                    </h3>
+                </div>
+
+                <div class="homepage-button-box" onclick="window.location.href='/reviews/list';">
+                    <h3>
+                        <span class="material-symbols-outlined">reviews</span>
+                        Reviews
+                    </h3>
+                </div>
+
+                <div class="homepage-button-box" onclick="window.location.href='/users/list';">
+                    <h3>
+                        <span class="material-symbols-outlined">account_circle</span>
+                        Users
+                    </h3>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="users-container">
+                <!-- Header -->
+                <div class="users-header">
+                    <h2>
+                        <span class="material-symbols-outlined">group</span>
+                        Activity & news
+                    </h2>
+                </div>
+                <!-- Popular box -->
+                <div class="popular-box uniform-color">
+                    <div th:if="${popularBook != null}">
+                        <h4 class="card-font" style="margin-bottom: 5px;">
+                            Most reviewed book
+                            <span style="font-family: 'Noto Color Emoji';">&#x2B50;</span>
+                        </h4>
+                        <p class="font-400" th:text="${popularBook.title}"></p>
+                        <p class="font-400" th:text="${'By: ' + popularBook.author.firstName + ' ' + popularBook.author.lastName}"></p>
+                    </div>
+
+                    <div th:if="${popularBook == null}">
+                        <p>No popular book found!</p>
+                    </div>
+
+                    <hr>
+
+                    <div th:if="${popularGenre != null}">
+                        <h4 class="card-font" style="margin-bottom: 5px;">
+                            Most popular genre
+                            <span style="font-family: 'Noto Color Emoji';">&#x1F389;</span>
+                        </h4>
+                        <p class="font-400" th:text="${popularGenre.name}"></p>
+                    </div>
+
+                    <div th:if="${popularGenre == null}">
+                        <p>No popular genre found!</p>
+                    </div>
+                </div>
+                <!-- User box -->
+                <div class="user-box uniform-color">
+                    <div th:if="${greetUser != null}">
+                        <h2 class="font-500">
+                            Say hi to
+                            <a th:href="@{/users/profile/{username}(username=${greetUser.username})}"
+                               th:text="${greetUser.username}"></a>
+                            <span style="font-family: 'Noto Color Emoji';">&#x1F44B;</span>
+                        </h2>
+                        <p class="font-100-16">
+                            Get to know this bookworm! Click on the name and find out more about them!
+                        </p>
+                        <div class="user-box-lower">
+                            <div class="user-emoji" th:switch="${greetUser.emoji}">
+                                <span th:case="1" class="emoji-styles">&#x1F60A;</span>
+                                <span th:case="2" class="emoji-styles">&#x1F60E;</span>
+                                <span th:case="3" class="emoji-styles">&#x1F913;</span>
+                                <span th:case="4" class="emoji-styles">&#x1F607;</span>
+                                <span th:case="5" class="emoji-styles">&#x1F9D0;</span>
+                                <span th:case="*" class="emoji-styles">&#x1F60A;</span>
+                            </div>
+                            <div class="about-user">
+                                <div class="about-container">
+                                    <div th:if="${userProfile.hobbies != null || userProfile.interests != null}">
+                                        <h4 class="card-font">
+                                            <span th:text="${greetUser.username}"></span>
+                                            likes:
+                                        </h4>
+                                        <p class="font-100-16">
+                                            <span th:if="${userProfile.hobbies != null}" th:text="${userProfile.hobbies}"></span>
+                                            <span th:if="${userProfile.hobbies != null && userProfile.interests != null}">&</span>
+                                            <span th:if="${userProfile.interests != null}" th:text="${userProfile.interests}"></span>
+                                        </p>
+                                    </div>
+                                    <div th:if="${userProfile.favoriteGenre != null || userProfile.favoriteAuthor != null}">
+                                        <h4 class="card-font">
+                                            & their favorites are:
+                                        </h4>
+                                        <p class="font-100-16">
+                                            <span th:if="${userProfile.favoriteGenre != null}" th:text="${userProfile.favoriteGenre.name}"></span>
+                                            <span th:if="${userProfile.favoriteGenre != null && userProfile.favoriteAuthor != null}"> & </span>
+                                            <span th:if="${userProfile.favoriteAuthor != null}" th:text="${userProfile.favoriteAuthor.firstName + ' ' + userProfile.favoriteAuthor.lastName}"></span>
+                                        </p>
+                                    </div>
+                                    <div th:if="${userProfile.hobbies == null && userProfile.interests == null && userProfile.favoriteGenre == null && userProfile.favoriteAuthor == null}">
+                                        <p>This user is so new they do not even have about me written!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div th:if="${greetUser == null}">
+                        <p style="color: black">No user found to greet! :(</p>
+                    </div>
+                </div>
+                <!--Card box -->
+                <div class="card-box uniform-color">
+                    <div th:if="${recentBook != null}">
+                        <h4 class="card-font" style="margin-bottom: 5px;">
+                            Have you already read this?
+                            <span style="font-family: 'Noto Color Emoji';">&#x1F525;</span>
+                        </h4>
+                        <br>
+                        <p class="font-400" th:text="${#strings.concat('&quot;', recentBook.title, '&quot;')}"></p>
+                        <h4 class="card-font" style="margin-bottom: 5px;">
+                            This is the most recent book in the collection!
+                        </h4>
+                    </div>
+
+                    <div th:if="${recentBook == null}">
+                        <p>No recent book has been found</p>
+                    </div>
+                </div>
+                <!-- Thoughts/feedback box -->
+                <div class="thoughts-box uniform-color">
+                    <h4 class="card-font" style="margin-bottom: 20px;">
+                        Share Your Thoughts
+                        <span style="font-family: 'Noto Color Emoji';">&#x1F4AC;</span>
+                    </h4>
+                    <div class="row mb-2">
+                        <form action="#"
+                              th:action="@{/processFeedback}" method="POST">
+                            <div class="col-md-10">
+                                <select id="feeling" name="feeling" class="form-select mb-2 w-100" required>
+                                    <option value="" disabled selected>I am feeling..</option>
+                                    <option value="happy">Happy</option>
+                                    <option value="excited">Excited</option>
+                                    <option value="relaxed">Relaxed</option>
+                                    <option value="curious">Curious</option>
+                                </select>
+                            </div>
+                            <div class="col-md-10">
+                                <label for="genre" class="form-label">What genre are you reading today?</label>
+                                <select id="genre" name="genre-id" class="form-select mb-2 w-100" required>
+                                    <option value="" disabled selected>Select a genre</option>
+                                    <option th:each="genre : ${genres}"
+                                            th:value="${genre.id}"
+                                            th:text="${genre.name}">
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-info col-4">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Quote box -->
+                <div class="quote-box uniform-color">
+                    <h4 class="card-font">
+                        Quote-box
+                        <span style="font-family: 'Noto Color Emoji';">&#x1F60D;</span>
+                    </h4>
+                    <hr>
+                    <div th:if="${quote != null}" style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <div style="display: flex; align-items: flex-start;">
+                            <h2 style="font-size: 40px; margin-right: 5px;">"</h2>
+                            <p class="quote" th:text="${quote}"></p>
+                        </div>
+                        <h2 style="font-size: 40px">"</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
