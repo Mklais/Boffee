@@ -51,6 +51,11 @@ inviting users to delve into a world of personal expression and discovery.
 - Review and influence
   - Reviewers can contribute by giving thoughtful reviews on books, influencing the reading choices of the community
 
+ - **Deletion strategies for Boffee entities**
+   - Application ensuresthat the deletion of entities such as authors, genres, and books does not leav orphan records or inconsistent state. Employ database cascading and application-level safeguards to:
+     - Maintain Data Integrity,
+     - Preserve User Experience,
+
 ## Technologies Used
 
 - Java
