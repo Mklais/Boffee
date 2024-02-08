@@ -32,7 +32,6 @@ public class FriendshipControllerService {
         model.addAttribute("incomingRequests", friendshipService.listIncomingFriendRequests(theUser));
     }
 
-
     public void handleAcceptFriendRequest(UserDetails userDetails, int friendshipId) {
         try {
             User currentUser = userService.findByUsername(userDetails.getUsername());

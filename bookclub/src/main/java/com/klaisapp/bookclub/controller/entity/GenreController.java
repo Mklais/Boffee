@@ -1,6 +1,6 @@
 package com.klaisapp.bookclub.controller.entity;
 
-import com.klaisapp.bookclub.exception.DuplicateEntityException;
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.Genre;
 import com.klaisapp.bookclub.service.controller.model.GenreControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,8 @@ public class GenreController {
     }
 
     @GetMapping("/addForm")
-    public String showFormForAdd(
-            @RequestParam(name = "redirectToBooks", required = false, defaultValue = "false") boolean redirectToBooks,
-            @RequestParam(name = "bookTitle", required = false) String bookTitle,
-            @RequestParam(name = "authorId", required = false) Integer authorId,
-            Model model) {
-        genreControllerService.addAttributesToAddForm(redirectToBooks, bookTitle, authorId, model);
+    public String showFormForAdd(Model model) {
+        genreControllerService.addAttributesToAddForm(model);
         return "genre/genre-form";
     }
 
@@ -42,25 +38,15 @@ public class GenreController {
     }
 
     @PostMapping("/save")
-    public String saveGenre(@ModelAttribute("genre") Genre theGenre, Model model) {
+    public String saveGenre(@ModelAttribute("genre") Genre genre, Model model) {
         try {
-            genreControllerService.saveGenre(theGenre);
-        } catch (DuplicateEntityException e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            genreControllerService.saveGenre(genre);
+        } catch (CustomApplicationException e) {
+            model.addAttribute("message", e.getMessage());
             return "genre/genre-form";
         }
         return "redirect:/genres/list";
     }
-
-//    @PostMapping("/save")
-//    public void saveGenre(
-//            @ModelAttribute("genre") Genre theGenre,
-//            @RequestParam(name = "redirectToBooks", required = false, defaultValue = "false") boolean redirectToBooks,
-//            @RequestParam(name = "bookTitle", required = false) String bookTitle,
-//            @RequestParam(name = "authorId", required = false) Integer authorId,
-//            Model model) {
-//        genreControllerService.saveGenre(theGenre, redirectToBooks, bookTitle, authorId, model);
-//    }
 
     @GetMapping("/delete")
     public String delete(@RequestParam("genreId") int theId) {

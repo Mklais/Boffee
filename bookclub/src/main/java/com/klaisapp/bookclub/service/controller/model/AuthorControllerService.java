@@ -1,14 +1,10 @@
 package com.klaisapp.bookclub.service.controller.model;
 
-import com.klaisapp.bookclub.exception.DuplicateEntityException;
 import com.klaisapp.bookclub.model.Author;
 import com.klaisapp.bookclub.service.model.author.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
-import java.util.List;
-
 @Service
 public class AuthorControllerService {
 
@@ -20,18 +16,15 @@ public class AuthorControllerService {
     }
 
     public void addAttributesToAuthorsList(Model model) {
-        List<Author> authors = authorService.findAll();
-        model.addAttribute("authors", authors);
+        model.addAttribute("authors", authorService.findAll());
     }
 
     public void addAttributesToAddForm(Model model) {
-        Author theAuthor = new Author();
-        model.addAttribute("author", theAuthor);
+        model.addAttribute("author", new Author());
     }
 
     public void addAttributesToEditForm(int theId, Model model) {
-        Author theAuthor = authorService.findById(theId);
-        model.addAttribute("author", theAuthor);
+        model.addAttribute("author", authorService.findById(theId));
     }
 
     public void saveAuthor(Author theAuthor) {

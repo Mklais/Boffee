@@ -1,12 +1,13 @@
 package com.klaisapp.bookclub.service.user.user;
 
-import com.klaisapp.bookclub.exception.UserNotFoundException;
+import com.klaisapp.bookclub.common.messages.Message;
+import com.klaisapp.bookclub.common.messages.MessageConstants;
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.user.Authority;
 import com.klaisapp.bookclub.model.user.User;
 import com.klaisapp.bookclub.model.user.UserProfile;
 import com.klaisapp.bookclub.repository.user.AuthorityRepository;
 import com.klaisapp.bookclub.repository.user.UserRepository;
-import com.klaisapp.bookclub.service.messageservice.errormessage.ErrorMessageService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -146,13 +147,11 @@ public class UserServiceImpl implements UserService {
      * Clears the security context and throws a UserNotFoundException.
      * This is used when a user is not found during validation.
      *
-     * @throws UserNotFoundException in case of not found, throw exception
+     * @throws CustomApplicationException in case of not found, throw exception
      */
     private void clearSecurityContextAndThrowUserNotFoundException() {
         SecurityContextHolder.clearContext();
-        throw new
-                UserNotFoundException(
-                ErrorMessageService.getNoUserFoundExceptionErrorMessage());
+        throw new CustomApplicationException(Message.error(MessageConstants.USER_NOT_FOUND));
     }
 
 }

@@ -1,9 +1,10 @@
 package com.klaisapp.bookclub.service.model.author;
 
-import com.klaisapp.bookclub.exception.DuplicateEntityException;
+import com.klaisapp.bookclub.common.messages.Message;
+import com.klaisapp.bookclub.common.messages.MessageConstants;
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.Author;
 import com.klaisapp.bookclub.repository.model.AuthorRepository;
-import com.klaisapp.bookclub.service.messageservice.errormessage.ErrorMessageService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,9 @@ public class AuthorServiceImpl implements AuthorService {
         this.authorRepository = authorRepository;
     }
 
-
     @Override
     public Author findById(int theId) {
         Optional<Author> result = authorRepository.findById(theId);
-
         return result.orElseThrow(() -> new RuntimeException("Did not find author with id: " + theId));
     }
 
@@ -37,11 +36,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public Author save(Author theAuthor) {
-
         boolean authorExists = doesAuthorExist(theAuthor.getFirstName(), theAuthor.getLastName());
 
         if (authorExists) {
-            throw new DuplicateEntityException(ErrorMessageService.getDuplicateAuthorErrorMessage());
+            throw new CustomApplicationException(Message.error(MessageConstants.ENTITY_DUPLICATE));
         }
 
         theAuthor.setBooks(null);
@@ -57,7 +55,6 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public boolean doesAuthorExist(String firstName, String lastName) {
         List<Author> authors = findAll();
-
         for (Author author : authors) {
             if (author.getFirstName().equals(firstName) && author.getLastName().equals(lastName)) {
                 return true;

@@ -1,9 +1,10 @@
 package com.klaisapp.bookclub.service.model.genre;
 
-import com.klaisapp.bookclub.exception.DuplicateEntityException;
+import com.klaisapp.bookclub.common.messages.Message;
+import com.klaisapp.bookclub.common.messages.MessageConstants;
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.Genre;
 import com.klaisapp.bookclub.repository.model.GenreRepository;
-import com.klaisapp.bookclub.service.messageservice.errormessage.ErrorMessageService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,6 @@ public class GenreServiceImpl implements GenreService {
         } else {
             throw new RuntimeException("Did not find genre with id: " + theId);
         }
-
         return theGenre;
     }
 
@@ -48,12 +48,10 @@ public class GenreServiceImpl implements GenreService {
         boolean genreExists = doesGenreExist(theGenre.getName());
 
         if (genreExists) {
-            throw new DuplicateEntityException(ErrorMessageService.getDuplicateGenreErrorMessage());
+            throw new CustomApplicationException(Message.error(MessageConstants.ENTITY_DUPLICATE));
         }
-
         // Set books to null for the newly created genre
         theGenre.setBooks(null);
-
         return genreRepository.save(theGenre);
     }
 

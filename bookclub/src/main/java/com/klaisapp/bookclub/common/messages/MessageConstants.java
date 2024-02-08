@@ -1,10 +1,12 @@
 package com.klaisapp.bookclub.common.messages;
 
 public final class MessageConstants {
-    public static final String AUTHOR_DUPLICATE =
-            "Author with the same first or last name already exists!";
-    public static final String GENRE_DUPLICATE =
-            "This genre already exists!";
+    public static final String ENTITY_NAME_DUPLICATE =
+            "Entity with this name already exists!";
+    public static final String ENTITY_DUPLICATE =
+            "This entity already exists!";
+    public static final String ENTITY_SAVED_SUCCESSFULLY =
+            "Entity saved successfully.";
     public static final String USER_DUPLICATE =
             "User with this username already exists!";
     public static final String USER_TOO_FEW_REGISTERED =

@@ -41,8 +41,7 @@
             </h4>
         </div>
 
-        <form action="#"
-              th:action="@{/books/save}"
+        <form th:action="@{/books/save}"
               th:object="${book}" method="POST"
               onsubmit="return validateGenres()">
 
@@ -67,15 +66,19 @@
             <div class="mb-4">
                 <div th:each="genre : ${genres}" class="form-check form-check-inline mb-4">
                     <input class="form-check-input"
-                           type="checkbox" th:field="*{genres}" th:value="${genre.id}" th:id="${'genre-' + genre.id}" name="genres" />
+                           type="checkbox"
+                           th:field="*{genres}"
+                           th:value="${genre.id}"
+                           th:id="${'genre-' + genre.id}"
+                           name="genres" />
                     <label class="form-check-label" th:for="${'genre-' + genre.id}" th:text="${genre.name}"></label>
                 </div>
-
                 <div class="mb-4">
                     <label>Did not find a suitable genre?</label>
-                    <a th:href="@{/genres/addForm(redirectToBooks=true)}">Add new</a>
+                    <a th:href="@{/genres/addForm}">
+                        Add new
+                    </a>
                 </div>
-
             </div>
 
             <button type="submit" class="btn btn-info col-2">Save</button>
@@ -84,8 +87,6 @@
         <hr>
 
         <a th:href="@{/books/list}">Back to Books List</a>
-
-        <p>todo: redirect with saved model of book</p>
     </div>
 
 </div>

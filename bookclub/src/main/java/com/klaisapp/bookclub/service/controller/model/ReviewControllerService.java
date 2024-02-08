@@ -9,9 +9,6 @@ import com.klaisapp.bookclub.service.model.reviewer.ReviewerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
-import java.util.List;
-
 @Service
 public class ReviewControllerService {
 
@@ -29,26 +26,18 @@ public class ReviewControllerService {
     }
 
     public void addAttributesToReviewsList(Model model) {
-        List<Review> reviews = reviewService.findAll();
-        model.addAttribute("reviews", reviews);
-
-        List<Reviewer> reviewers = reviewerService.findAll();
-        model.addAttribute("reviewers", reviewers);
+        model.addAttribute("reviews", reviewService.findAll());
+        model.addAttribute("reviewers", reviewerService.findAll());
     }
 
     public void addAttributesToAddForm(Model model) {
-        Review theReview = new Review();
-        List<Reviewer> theReviewers = reviewerService.findAll();
-        List<Book> theBooks = bookService.findAll();
-
-        model.addAttribute("review", theReview);
-        model.addAttribute("reviewers", theReviewers);
-        model.addAttribute("books", theBooks);
+        model.addAttribute("review", new Review());
+        model.addAttribute("reviewers", reviewerService.findAll());
+        model.addAttribute("books", bookService.findAll());
     }
 
     public void addAttributesToUpdateForm(int theId, Model model) {
-        Review theReview = reviewService.findById(theId);
-        model.addAttribute("review", theReview);
+        model.addAttribute("review", reviewService.findById(theId));
     }
 
     public void saveReview(Review theReview, int bookId) {
@@ -64,11 +53,8 @@ public class ReviewControllerService {
     public void addAttributesToListReviewsByReviewer(int theId, Model model) {
         Reviewer reviewer = reviewerService.findById(theId);
         model.addAttribute("reviewer", reviewer);
+        model.addAttribute("reviews", reviewer.getReviews());
 
-        List<Reviewer> reviewers = reviewerService.findAll();
-        model.addAttribute("reviewers", reviewers);
-
-        List<Review> reviews = reviewer.getReviews();
-        model.addAttribute("reviews", reviews);
+        model.addAttribute("reviewers", reviewerService.findAll());
     }
 }

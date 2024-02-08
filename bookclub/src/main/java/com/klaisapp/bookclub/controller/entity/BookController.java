@@ -1,4 +1,6 @@
 package com.klaisapp.bookclub.controller.entity;
+
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.Book;
 import com.klaisapp.bookclub.service.controller.model.BookControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,8 @@ public class BookController {
     }
 
     @GetMapping("/addForm")
-    public String addBook(@RequestParam(name = "bookTitle", required = false) String bookTitle, Model model) {
-        bookControllerService.addAttributesToAddForm(bookTitle ,model);
+    public String showFormForAdd(Model model) {
+        bookControllerService.addAttributesToBookAddForm(model);
         return "book/book-form";
     }
 

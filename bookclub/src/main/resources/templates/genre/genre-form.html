@@ -30,8 +30,10 @@
         </div>
 
         <!-- Duplicate handling -->
-        <div th:if="${errorMessage}" class="alert alert-danger rounded-pill text-center" role="alert" style="font-size: 14px;">
-            <p th:text="${errorMessage}"></p>
+        <div th:if="${message}"
+             class="alert alert-danger rounded-pill text-center"
+             role="alert" style="font-size: 14px;">
+            <p th:text="${message}"></p>
         </div>
 
         <form th:action="@{/genres/save}"

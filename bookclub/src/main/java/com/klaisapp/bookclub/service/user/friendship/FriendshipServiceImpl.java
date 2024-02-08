@@ -7,7 +7,6 @@ import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.user.Friendship;
 import com.klaisapp.bookclub.model.user.User;
 import com.klaisapp.bookclub.repository.user.FriendshipRepository;
-import com.klaisapp.bookclub.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +20,9 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     private final FriendshipRepository friendshipRepository;
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public FriendshipServiceImpl(FriendshipRepository friendshipRepository, UserRepository userRepository) {
+    public FriendshipServiceImpl(FriendshipRepository friendshipRepository) {
         this.friendshipRepository = friendshipRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -57,7 +53,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Transactional
     public void acceptFriendRequest(int requestId) {
         Friendship friendRequest = friendshipRepository.findById(requestId)
-                .orElseThrow(() -> new RuntimeException("Friend request not found!"));
+                .orElseThrow(() -> new RuntimeException(MessageConstants.FRIEND_REQUEST_NOT_FOUND));
         friendRequest.setStatus(FriendshipStatus.ACCEPTED);
         friendRequest.setRespondedAt(new Date());
         friendshipRepository.save(friendRequest);
@@ -67,7 +63,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Transactional
     public void declineFriendRequest(int requestId) {
         Friendship friendRequest = friendshipRepository.findById(requestId)
-                .orElseThrow(() -> new RuntimeException("Friend request not found!"));
+                .orElseThrow(() -> new RuntimeException(MessageConstants.FRIEND_REQUEST_NOT_FOUND));
         friendRequest.setStatus(FriendshipStatus.DECLINED);
         friendRequest.setRespondedAt(new Date());
         friendshipRepository.save(friendRequest);
@@ -93,7 +89,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     public FriendshipStatus determineFriendshipStatus(User user1, User user2) {
         Optional<Friendship> friendship = friendshipRepository.findByUsers(user1.getUserId(), user2.getUserId());
 
-        if (!friendship.isPresent()) {
+        if (friendship.isEmpty()) {
             return FriendshipStatus.NOT_FRIENDS;
         }
 

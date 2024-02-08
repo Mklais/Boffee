@@ -1,6 +1,6 @@
 package com.klaisapp.bookclub.controller.entity;
 
-import com.klaisapp.bookclub.exception.DuplicateEntityException;
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.Author;
 import com.klaisapp.bookclub.service.controller.model.AuthorControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +41,8 @@ public class AuthorController {
     public String saveAuthor(@ModelAttribute("author") Author theAuthor, Model model) {
         try {
             authorControllerService.saveAuthor(theAuthor);
-        } catch (DuplicateEntityException e) {
-            model.addAttribute("errorMessage", e.getMessage());
+        } catch (CustomApplicationException e) {
+            model.addAttribute("message", e.getMessage());
             return "author/author-form";
         }
         return "redirect:/authors/list";

@@ -1,5 +1,7 @@
 package com.klaisapp.bookclub.service.controller.page;
 
+import com.klaisapp.bookclub.common.messages.Message;
+import com.klaisapp.bookclub.common.messages.MessageConstants;
 import com.klaisapp.bookclub.model.Book;
 import com.klaisapp.bookclub.model.Genre;
 import com.klaisapp.bookclub.model.user.User;
@@ -8,7 +10,6 @@ import com.klaisapp.bookclub.repository.model.BookRepository;
 import com.klaisapp.bookclub.repository.model.GenreRepository;
 import com.klaisapp.bookclub.repository.user.UserRepository;
 import com.klaisapp.bookclub.common.messages.LiteraryQuotesGenerator;
-import com.klaisapp.bookclub.service.messageservice.errormessage.ErrorMessageService;
 import com.klaisapp.bookclub.service.user.user.UserService;
 import com.klaisapp.bookclub.service.user.userprofile.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class HomeControllerService {
 
     public void addUserData(Model model) {
         String username = userService.getLoggedInUsername();
-        Optional<User> loggedInUser = (username != null) ? userRepository.findByUsername(username) : null;
+        Optional<User> loggedInUser = (username != null) ? userRepository.findByUsername(username) : Optional.empty();
         model.addAttribute("loggedInUser", loggedInUser);
     }
 
@@ -136,7 +137,7 @@ public class HomeControllerService {
                 .collect(Collectors.toList());
 
         if (activeUsers.size() <= 1) {
-            ErrorMessageService.getTooFewRegisteredUsersErrorMessage();
+            Message.info(MessageConstants.USER_TOO_FEW_REGISTERED);
             return;
         }
 

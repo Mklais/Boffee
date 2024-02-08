@@ -1,8 +1,8 @@
 package com.klaisapp.bookclub.service.controller.page;
 
+import com.klaisapp.bookclub.common.messages.MessageConstants;
 import com.klaisapp.bookclub.model.user.User;
 import com.klaisapp.bookclub.model.user.UserProfile;
-import com.klaisapp.bookclub.service.messageservice.errormessage.ErrorMessageService;
 import com.klaisapp.bookclub.service.user.user.UserService;
 import com.klaisapp.bookclub.service.user.userprofile.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class RegistrationControllerService {
 
     public boolean isErrorInRegistrationProcess(User user, String passwordVerify, Model model) {
         if (!user.getPassword().equals(passwordVerify)) {
-            model.addAttribute("error", ErrorMessageService.getNoMatchingPasswordsErrorMessage());
+            model.addAttribute("error", MessageConstants.PASSWORDS_DO_NOT_MATCH);
             return true;
         } else {
             return false;
@@ -41,7 +41,6 @@ public class RegistrationControllerService {
      */
     public void saveUser(User user) {
         createUserAssociatedPersonalProfile(user);
-        // use of success-handler?
     }
 
     private void createUserAssociatedPersonalProfile(User user) {

@@ -5,9 +5,6 @@ import com.klaisapp.bookclub.service.model.reviewer.ReviewerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
-import java.util.List;
-
 @Service
 public class ReviewerControllerService {
 
@@ -19,18 +16,15 @@ public class ReviewerControllerService {
     }
 
     public void addAttributesToReviewersList(Model model) {
-        List<Reviewer> theReviewers = reviewerService.findAll();
-        model.addAttribute("reviewers", theReviewers);
+        model.addAttribute("reviewers", reviewerService.findAll());
     }
 
     public void addAttributesToAddForm(Model model) {
-        Reviewer theReviewer = new Reviewer();
-        model.addAttribute("reviewer", theReviewer);
+        model.addAttribute("reviewer", new Reviewer());
     }
 
     public void addAttributesToUpdateForm(int theId, Model model) {
-        Reviewer theReviewer = reviewerService.findById(theId);
-        model.addAttribute("reviewer", theReviewer);
+        model.addAttribute("reviewer", reviewerService.findById(theId));
     }
 
     public void saveReviewer(Reviewer theReviewer) {

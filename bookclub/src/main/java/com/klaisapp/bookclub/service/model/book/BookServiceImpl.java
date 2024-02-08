@@ -1,5 +1,8 @@
 package com.klaisapp.bookclub.service.model.book;
 
+import com.klaisapp.bookclub.common.messages.Message;
+import com.klaisapp.bookclub.common.messages.MessageConstants;
+import com.klaisapp.bookclub.exception.CustomApplicationException;
 import com.klaisapp.bookclub.model.Book;
 import com.klaisapp.bookclub.repository.model.BookRepository;
 import jakarta.transaction.Transactional;
@@ -22,10 +25,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book findById(int theId) {
         Optional<Book> result = bookRepository.findById(theId);
-
         return result.orElseThrow(() -> new RuntimeException("Did not find book with id: " + theId));
     }
-
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
@@ -34,7 +35,24 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book save(Book theBook) {
+        boolean bookExists = doesBookWithTitleExist(theBook.getTitle());
+
+        if (bookExists) {
+            throw new CustomApplicationException(Message.error(MessageConstants.ENTITY_DUPLICATE));
+        }
+
         return bookRepository.save(theBook);
+    }
+
+    private boolean doesBookWithTitleExist(String title) {
+        List<Book> books = findAll();
+
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.klaisapp.bookclub.service.controller.model;
 
 import com.klaisapp.bookclub.model.Author;
 import com.klaisapp.bookclub.model.Book;
-import com.klaisapp.bookclub.model.Genre;
 import com.klaisapp.bookclub.service.model.author.AuthorService;
 import com.klaisapp.bookclub.service.model.book.BookService;
 import com.klaisapp.bookclub.service.model.genre.GenreService;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
-
 @Service
 public class BookControllerService {
 
@@ -31,36 +29,20 @@ public class BookControllerService {
     }
 
     public void addAttributesToBooksList(Model model) {
-        List<Book> books = bookService.findAll();
-        model.addAttribute("books", books);
-
-        List<Author> authors = authorService.findAll();
-        model.addAttribute("authors", authors);
+        model.addAttribute("books", bookService.findAll());
+        model.addAttribute("authors", authorService.findAll());
     }
 
-    public void addAttributesToAddForm(String bookTitle, Model model) {
-        Book theBook = new Book();
-
-        List<Author> authors = authorService.findAll();
-        List<Genre> genres = genreService.findAll();
-
-        if (bookTitle != null) {
-            theBook.setTitle(bookTitle);
-        }
-
-        model.addAttribute("book", theBook);
-        model.addAttribute("authors", authors);
-        model.addAttribute("genres", genres);
+    public void addAttributesToBookAddForm(Model model) {
+        model.addAttribute("book", new Book());
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
     }
 
     public void addAttributesToEditForm(int theId, Model model) {
-        Book theBook = bookService.findById(theId);
-        List<Author> authors = authorService.findAll();
-        List<Genre> genres = genreService.findAll();
-
-        model.addAttribute("book", theBook);
-        model.addAttribute("authors", authors);
-        model.addAttribute("genres", genres);
+        model.addAttribute("book", bookService.findById(theId));
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
     }
 
     /**
@@ -89,10 +71,9 @@ public class BookControllerService {
         Author author = authorService.findById(theId);
         model.addAttribute("author", author);
 
-        List<Author> authors = authorService.findAll();
-        model.addAttribute("authors", authors);
-
         List<Book> books = author.getBooks();
         model.addAttribute("books", books);
+
+        model.addAttribute("authors", authorService.findAll());
     }
 }
