@@ -8,8 +8,8 @@ Feel free to contact me through any means:
 - marten.kustav@gmail.com
 - https://www.linkedin.com/in/marten-kustav-klais/
 
-## Todo List / Currently in development:
-
+## Currently in development:
+### TODO LIST:
 - Securing endpoints
 - **Endpoint Security:** Implementing access control to secure user-specific endpoints.
   - Ensuring users can only access their own profile information.
@@ -19,8 +19,7 @@ Feel free to contact me through any means:
   - Securing critical endpoints based on user roles.
 - Login invalid error handlers
 
-## Recently completed TODO List:
-
+### Recently completed TODO List:
 - **Dynamic Friendship model**
   - Manage friendships
   - system supported friend system with friend requests, friend-list and a interactive system for adding friends
