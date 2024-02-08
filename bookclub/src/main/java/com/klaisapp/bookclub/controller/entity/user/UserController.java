@@ -3,6 +3,9 @@ package com.klaisapp.bookclub.controller.entity.user;
 import com.klaisapp.bookclub.model.user.User;
 import com.klaisapp.bookclub.service.user.controller.UserControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +21,24 @@ public class UserController {
         this.userControllerService = userControllerService;
     }
 
+    @ModelAttribute("loggedInUser")
+    public String addLoggedInUsername(Authentication authentication) {
+        return (authentication != null && authentication.isAuthenticated()) ? authentication.getName() : null;
+    }
+
     @GetMapping("/list")
-    public String listUsers(Model model) {
-        userControllerService.addAttributesToUsersList(model);
+    public String listUsers(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model) {
+        userControllerService.addAttributesToUsersList(userDetails, model);
         return "user/user-list";
     }
 
     @GetMapping("/profile/{username}")
-    public String showUserProfile(@PathVariable String username, Model model) {
-        userControllerService.addAttributesToProfilePage(username, model);
+    public String showUserProfile(@PathVariable String username,
+                                  @AuthenticationPrincipal UserDetails userDetails,
+                                  Model model) {
+        userControllerService.prepareProfilePageModel(userDetails, username, model);
         return "user/user-profile";
     }
 

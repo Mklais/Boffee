@@ -1,12 +1,14 @@
 package com.klaisapp.bookclub.model.user;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User {
 
     @Id
@@ -53,20 +55,17 @@ public class User {
     @JoinColumn(name = "profile_id", referencedColumnName = "profile_id")
     private UserProfile userProfile;
 
+//    @OneToMany(mappedBy = "senderId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Friendship> sentFriendRequests;
+//
+//    @OneToMany(mappedBy = "receiverId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Friendship> receivedFriendRequests;
+
     public User() {
 
     }
 
-    public User(String username,
-                String password,
-                int active,
-                int activityPoints,
-                String firstName,
-                String lastName,
-                String email,
-                String emoji,
-                Set<Authority> authorities,
-                UserProfile userProfile) {
+    public User(String username, String password, int active, int activityPoints, String firstName, String lastName, String email, String emoji, Set<Authority> authorities, UserProfile userProfile) {
         this.username = username;
         this.password = password;
         this.active = active;
@@ -76,94 +75,6 @@ public class User {
         this.email = email;
         this.emoji = emoji;
         this.authorities = authorities;
-        this.userProfile = userProfile;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
-    }
-
-    public int getActivityPoints() {
-        return activityPoints;
-    }
-
-    public void setActivityPoints(int activityPoints) {
-        this.activityPoints = activityPoints;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmoji() {
-        return emoji;
-    }
-
-    public void setEmoji(String emoji) {
-        this.emoji = emoji;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public UserProfile getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
 

@@ -83,17 +83,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(User user, UserProfile userProfile) {
-        // Set default data
         user.setPassword("{noop}" + user.getPassword());
         user.setActive(1);
         user.setActivityPoints(0);
         user.setEmoji("1");
 
-        // Set authority
         Authority defaultAuthority = authorityRepository.findById(DEFAULT_AUTHORITY_INDEX);
 
         if (defaultAuthority != null) {
-            // Set authority for the user
             user.setAuthorities(Set.of(defaultAuthority));
         }
 

@@ -39,8 +39,7 @@ public class AuthorityControllerService {
     }
 
     public void addUserAuthorityAttributes(Model model) {
-        boolean isUserAdmin = isUserAdminAuthority();
-        model.addAttribute("isUserAdmin", isUserAdmin);
+        model.addAttribute("isUserAdmin", isUserAdminAuthority());
     }
 
     private boolean isUserAdminAuthority() {

@@ -34,6 +34,13 @@
             </a>
         </div>
 
+        <div id="flashMessage"
+             th:if="${message != null}"
+             th:data-message="${message.content}"
+             th:data-message-type="${message.type}"
+             style="display: none;">
+        </div>
+
         <!-- Active friendships list -->
         <th:block th:if="${friendships.size() > 0}">
             <table class="table rounded-4 overflow-hidden table-bordered table-striped">
@@ -45,15 +52,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="friendship : ${friendships}">
-                    <td th:text="${friendship.user2.username}"></td>
-                    <td th:text="${friendship.status.getDescription()}"
-                        th:style="'color: ' + ${friendship.status.getColorCode()}"></td>
-                    <!-- Action Buttons -->
+                <tr th:each="friendship : ${friendships}"
+                    th:with="profileUsername=${friendship.sender.username.equals(theUser.username)} ? ${friendship.receiver.username} : ${friendship.sender.username}">
+                    <td th:text="${profileUsername}"></td>
+                    <td th:text="${friendship.status.getDescription()}" th:style="'color: ' + ${friendship.status.getColorCode()}"></td>
                     <td class="actions-column">
-                        <a th:href="@{'/users/profile/' + ${friendship.user2.username}}"
+                        <a th:href="@{/users/profile/{username}(username=${profileUsername})}"
                            class="btn btn-info btn-sm"
-                           title="View Bookworm">
+                           title="View Profile">
                             <span class="material-symbols-outlined">user_attributes</span>
                         </a>
                     </td>
@@ -63,7 +69,7 @@
         </th:block>
 
         <!-- Check if there are pending friendships -->
-        <th:block th:if="${pendingFriendships.size() > 0}">
+        <th:block th:if="${incomingRequests.size() > 0}">
             <div class="pending-friendships-container">
                 <h2>
                     Incoming friend requests
@@ -80,25 +86,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="pendingFriendship : ${pendingFriendships}">
-                        <td th:text="${pendingFriendship.user1.username}"></td>
-                        <td th:text="${pendingFriendship.status.getDescription()}"
-                            th:style="'color: ' + ${pendingFriendship.status.getColorCode()}"></td>
+                    <tr th:each="incomingRequest : ${incomingRequests}">
+                        <td th:text="${incomingRequest.sender.username}"></td>
+                        <td th:text="${incomingRequest.status.getDescription()}"
+                            th:style="'color: ' + ${incomingRequest.status.getColorCode()}"></td>
                         <!-- Action Buttons -->
                         <td class="friendship-action-column">
                             <div class="action-buttons">
-                                <!-- Accept button -->
-                                <form th:action="@{/friends/accept}" method="post" onsubmit="showFriendRequestAccepted()">
-                                    <input type="hidden" name="friendshipId" th:value="${pendingFriendship.friendshipId}" />
-                                    <button type="submit" class="btn btn-success btn-sm">
+                                 <!--Accept button-->
+                                <form th:action="@{/friends/accept}"
+                                      method="post">
+                                    <input type="hidden"
+                                           name="friendshipId"
+                                           th:value="${incomingRequest.friendshipId}" />
+                                    <button type="submit"
+                                            class="btn btn-success btn-sm"
+                                            onsubmit="">
                                         <span class="material-symbols-outlined">person_add</span>
                                     </button>
                                 </form>
-
                                 <!-- Decline button -->
-                                <form th:action="@{/friends/decline}" method="post">
-                                    <input type="hidden" name="friendshipId" th:value="${pendingFriendship.friendshipId}" />
-                                    <button type="submit" class="btn btn-danger btn-sm">
+                                <form th:action="@{/friends/decline}"
+                                      method="post">
+                                    <input type="hidden"
+                                           name="friendshipId"
+                                           th:value="${incomingRequest.friendshipId}" />
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
                                         <span class="material-symbols-outlined">person_off</span>
                                     </button>
                                 </form>
@@ -113,13 +127,18 @@
     </div>
 </div>
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    function showFriendRequestAccepted() {
-        alert('Friend request accepted!');
-    }
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var messageContainer = document.getElementById("flashMessage");
+        if (messageContainer) {
+            var message = messageContainer.getAttribute("data-message");
+            var messageType = messageContainer.getAttribute("data-message-type");
 
-    /*]]>*/
+            if (message && message !== '${message}') {
+                alert(message);
+            }
+        }
+    });
 </script>
 
 </body>

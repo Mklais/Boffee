@@ -9,20 +9,29 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FriendshipRepository extends JpaRepository<Friendship, Integer> {
+    @Query("SELECT CASE WHEN COUNT(f) > 0 " +
+            "THEN true ELSE false END " +
+            "FROM Friendship f " +
+            "WHERE (f.sender = :sender AND f.receiver = :receiver) " +
+            "OR (f.sender = :receiver AND f.receiver = :sender)")
+    boolean existsBySenderAndReceiver(@Param("sender") User sender, @Param("receiver") User receiver);
 
-    Friendship findByUser1AndUser2(User user1, User user2);
+    @Query("SELECT f FROM Friendship f " +
+            "WHERE ((f.sender = :user AND f.status = 'PENDING') " +
+            "OR (f.receiver = :user AND f.status = 'ACCEPTED') " +
+            "OR (f.sender = :user AND f.status = 'ACCEPTED'))")
+    List<Friendship> findAllRelevantFriendshipsByUser(@Param("user") User user);
 
-    boolean existsByUser1AndUser2AndStatus(User user1, User user2, FriendshipStatus status);
+    @Query("SELECT f FROM Friendship f " +
+            "WHERE (f.receiver = :user) AND f.status = :status")
+    List<Friendship> findAllByReceiverAndStatus(@Param("user") User user, @Param("status") FriendshipStatus status);
 
     @Query("SELECT f FROM Friendship f WHERE " +
-            "(f.user1.userId = :userId AND (f.status = 'ACCEPTED' OR (f.status = 'PENDING' AND f.user2.userId = :userId))) " +
-            "OR (f.user2.userId = :userId AND (f.status = 'ACCEPTED' OR (f.status = 'PENDING' AND f.user1.userId = :userId)))")
-    List<Friendship> findFriendshipsForUser(@Param("userId") int userId);
-
-    @Query("SELECT f FROM Friendship f WHERE (f.user1.id = :userId OR f.user2.id = :userId) AND f.status = :status")
-    List<Friendship> findPendingFriendshipsByReceiver(
-            @Param("userId") int userId, @Param("status") FriendshipStatus status);
+            "(f.sender.id = :userId1 AND f.receiver.id = :userId2) OR " +
+            "(f.sender.id = :userId2 AND f.receiver.id = :userId1)")
+    Optional<Friendship> findByUsers(@Param("userId1") int userId1, @Param("userId2") int userId2);
 }

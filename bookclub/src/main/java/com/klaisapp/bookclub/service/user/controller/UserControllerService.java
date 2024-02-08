@@ -1,7 +1,5 @@
 package com.klaisapp.bookclub.service.user.controller;
 
-import com.klaisapp.bookclub.common.FriendshipStatus;
-import com.klaisapp.bookclub.model.user.Friendship;
 import com.klaisapp.bookclub.model.user.User;
 import com.klaisapp.bookclub.model.user.UserProfile;
 import com.klaisapp.bookclub.service.user.authority.AuthorityServiceImpl;
@@ -10,6 +8,7 @@ import com.klaisapp.bookclub.service.user.friendship.FriendshipService;
 import com.klaisapp.bookclub.service.user.user.UserService;
 import com.klaisapp.bookclub.service.user.userprofile.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -44,12 +43,10 @@ public class UserControllerService {
      * Adds a list of users to the model attribute for rendering in views.
      * @param model The Spring MVC model.
      */
-    public void addAttributesToUsersList(Model model) {
+    public void addAttributesToUsersList(UserDetails userDetails, Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-
         authorityControllerService.addUserAuthorityAttributes(model);
-        addLoggedInUsername(model);
     }
 
     /**
@@ -57,70 +54,55 @@ public class UserControllerService {
      * @param username The username of the user.
      * @param model The Spring MVC model.
      */
-    public void addAttributesToProfilePage(String username, Model model) {
-        // Model names inserted are:
-        // theUser
-        // theProfile
+    public void prepareProfilePageModel(UserDetails userDetails, String username, Model model) {
+        User viewedUser = retrieveUserForProfile(username, model);
+        User currentUser = userService.findByUsername(userDetails.getUsername());
 
-        // Finding and validating the user that is being viewed
-        User theUser = findAndProcessUserForProfilePage(username, model);
-
-        // Adding user & it's profile attributes to the model
-        addUserAttributes(theUser, model);
-        addUserProfileAttributes(theUser, model);
-    }
-
-    private User findAndProcessUserForProfilePage(String username, Model model) {
-        User theUser = userService.findByUsername(username);
-        // Validate and add logged in user
-        userService.findAndValidateUser(theUser);
-        model.addAttribute("theUser", theUser);
-
-        return theUser;
+        populateModelWithUserProfileData(viewedUser, currentUser, model);
     }
 
     /**
-     * Private methods for profile page displaying
+     * Retrieves and validates the user associated with the given username, adding them to the model.
+     *
+     * @param username The username of the user to find.
+     * @return The User entity associated with the given username.
      */
-    private void addUserAttributes(User theUser, Model model) {
-        addLoggedInUsername(model);
-        authorityUpgradeService.evaluateAndSetAuthorityUpgradeStatus(theUser, model);
-        addAuthorityRankByName(theUser, model);
-        addFriendshipAttributes(theUser, model);
+    private User retrieveUserForProfile(String username, Model model) {
+        User user = userService.findByUsername(username);
+        userService.findAndValidateUser(user);
+        return user;
     }
-
-    private void addFriendshipAttributes(User theUser, Model model) {
-        String loggedInUsername = userService.getLoggedInUsername();
-        User loggedInUser = userService.findByUsername(loggedInUsername);
-
-        FriendshipStatus friendshipStatus = friendshipService.determineFriendshipStatus(loggedInUser, theUser);
-
-        model.addAttribute("friendshipStatus", friendshipStatus);
-    }
-
-//    private FriendshipStatus determineFriendshipStatus(String loggedInUsername, String profileUsername) {
-//        Friendship friendship = friendshipService.findFriendshipsByUsernames(loggedInUsername, profileUsername);
-//
-//        if (friendship != null) {
-//            return friendship.getStatus();
-//        } else {
-//            // Friendship doesn't exist, check if a friend request has been sent
-//            // or if they are not friends at all
-//            if (friendshipService.isFriendRequestSent(loggedInUsername, profileUsername)) {
-//                return FriendshipStatus.REQUEST_SENT;
-//            } else {
-//                return FriendshipStatus.NOT_FRIENDS;
-//            }
-//        }
-//    }
 
     /**
-     * Adding profile attributes to the model
-     * @param theUser for whom to add profile attributes to
-     * @param model to which profile attributes will be added
+     * Populates the model with attributes related to the user's profile and their relationship with the current user.
+     *
+     * @param viewedUser  The user being viewed.
+     * @param currentUser The currently authenticated user.
+     * @param model       The model to which attributes will be added.
      */
-    private void addUserProfileAttributes(User theUser, Model model) {
-        UserProfile userProfile = theUser.getUserProfile();
+    private void populateModelWithUserProfileData(User viewedUser, User currentUser, Model model) {
+        addUserAndItsProfileAttributes(viewedUser, model);
+
+        // Evaluate and set authority and rank status for the viewed user.
+        authorityUpgradeService.evaluateAndSetAuthorityUpgradeStatus(viewedUser, model);
+        addAuthorityRankByName(viewedUser, model);
+
+        // Determine and add the friendship status between the current user and the viewed user.
+        determineAndAddFriendshipStatus(currentUser, viewedUser, model);
+    }
+
+    private void addAuthorityRankByName(User theUser, Model model) {
+        model.addAttribute("authorityRank", authorityService.findHighestAuthorityRankByName(theUser));
+    }
+
+    private void determineAndAddFriendshipStatus(User currentUser, User viewedUser, Model model) {
+        model.addAttribute("friendshipStatus", friendshipService
+                .determineFriendshipStatus(currentUser, viewedUser));
+    }
+
+    private void addUserAndItsProfileAttributes(User viewedUser, Model model) {
+        model.addAttribute("theUser", viewedUser);
+        UserProfile userProfile = viewedUser.getUserProfile();
         model.addAttribute("theProfile", userProfile);
     }
 
@@ -149,21 +131,7 @@ public class UserControllerService {
         // Clear all authorities from user
         // User-profile is cascade deleted
         userToDelete.getAuthorities().clear();
-
         userService.save(userToDelete);
-
         userService.deleteById(theId);
-    }
-
-    // Private helper methods
-
-    private void addAuthorityRankByName(User theUser, Model model) {
-        String authorityRank = authorityService.findHighestAuthorityRankByName(theUser);
-        model.addAttribute("authorityRank", authorityRank);
-    }
-
-    private void addLoggedInUsername(Model model) {
-        String loggedInUsername = userService.getLoggedInUsername();
-        model.addAttribute("loggedInUser", loggedInUsername);
     }
 }

@@ -25,4 +25,8 @@ public class ErrorMessageService {
     public static String getTooFewRegisteredUsersErrorMessage() {
         return "Too few users have registered on Boffee, invite them to join!";
     }
+
+    public static String getErrorAcceptingFriendRequest() {
+        return "Error accepting friend request!";
+    }
 }

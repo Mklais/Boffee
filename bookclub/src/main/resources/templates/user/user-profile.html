@@ -23,6 +23,13 @@
 
         <hr>
 
+        <div id="flashMessage"
+             th:if="${message != null}"
+             th:data-message="${message.content}"
+             th:data-message-type="${message.type}"
+             style="display: none;">
+        </div>
+
         <div class="navigation-buttons d-flex justify-content-between">
             <div>
                 <!-- Button for returning to homepage -->
@@ -35,7 +42,7 @@
                 </a>
                 <!-- Button for viewing friends -->
                 <a th:if="${loggedInUser == theUser.username}"
-                   th:href="@{'/friends/list/profile/' + ${theUser.username}}"
+                   th:href="@{'/friends/list/' + ${theUser.username}}"
                    class="btn btn-success btn-sm mb-3">
                     View & manage friends
                 </a>
@@ -46,8 +53,7 @@
                     <!-- If not friends, show Add Friend button -->
                     <form th:case="'NOT_FRIENDS'"
                           th:action="@{/friends/send}"
-                          method="post"
-                          onsubmit="showFriendAddedMessage()">
+                          method="post">
                         <input type="hidden" name="receiverId"
                                th:value="${theUser.userId}" />
                         <button type="submit" class="btn btn-success btn-sm mb-3 btn-friendship">
@@ -226,11 +232,21 @@
     function showUpgradeNotification() {
         alert('Upgrade successful!');
     }
-
-    function showFriendAddedMessage() {
-        alert('Friend request sent successfully!');
-    }
     /*]]>*/
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var messageContainer = document.getElementById("flashMessage");
+        if (messageContainer) {
+            var message = messageContainer.getAttribute("data-message");
+            var messageType = messageContainer.getAttribute("data-message-type");
+
+            if (message && message !== '${message}') {
+                alert(message);
+            }
+        }
+    });
 </script>
 
 </body>

@@ -7,7 +7,7 @@ import com.klaisapp.bookclub.model.user.UserProfile;
 import com.klaisapp.bookclub.repository.model.BookRepository;
 import com.klaisapp.bookclub.repository.model.GenreRepository;
 import com.klaisapp.bookclub.repository.user.UserRepository;
-import com.klaisapp.bookclub.service.messageservice.LiteraryQuotesGenerator;
+import com.klaisapp.bookclub.common.messages.LiteraryQuotesGenerator;
 import com.klaisapp.bookclub.service.messageservice.errormessage.ErrorMessageService;
 import com.klaisapp.bookclub.service.user.user.UserService;
 import com.klaisapp.bookclub.service.user.userprofile.UserProfileService;

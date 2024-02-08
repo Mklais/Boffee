@@ -27,18 +27,27 @@ Boffee is a web application crafted to manage and interact with user profiles wi
 With its user-friendly interface, Boffee makes registration and profile management a breeze,
 inviting users to delve into a world of personal expression and discovery.
 
+Users & their profiles makes for a more connected and engaging community experience.
+
 ## Features
 
-- Personalized Profiles
-  - Users can create comprehensive profiles, highlighting their personality, hobbies and interests. 
-  - This makes for a more connected and engaging community experience.
+- **User authentication & Registration**
+  - Secure login & registration system for users.
+- **Authority and Role Management**
+  - Advanced role-based access control. Users can be assigned different authorities and roles, affecting what they can see and do within the application.
+- **Dynamic Friendship Management**
+  - Users can manage friendships directly from their profile or a dedicated friendship page.
+  - The system supports adding friends, accepting friend requests, and viewing current friends and pending requests.
+  - Friendship status is dynamically updated and reflected in the user interface, enhancing user interaction and engagement.
+- **Personalized Profiless**
+  - Personalized user profiles with the ability to view and update personal information.
 - Read & Recommend
   - A platform for book enthusiasts, Boffee encourages users to share their reading experiences, recommend books and contribute to a growing database of literary treasures.
 - Community Engagement
-  - Users can explore profiles of fellow bookworms, learn about their book preferences
+  - Users can explore profiles of fellow bookworms, learn about their book preferences and much more!
 - Review and influence
   - Reviewers can contribute by giving thoughtful reviews on books, influencing the reading choices of the community
-  - 
+
 
 ## Technologies Used
 
@@ -65,6 +74,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Maven
 - MySQL Server & Workbench for database management
 - Lombok Plugin (Enable annotation processing in IDE settings)
+- All necessary dependencies
 
 #### 2) Set up the Database
 

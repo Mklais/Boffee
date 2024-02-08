@@ -3,24 +3,18 @@ package com.klaisapp.bookclub.service.user.friendship;
 import com.klaisapp.bookclub.common.FriendshipStatus;
 import com.klaisapp.bookclub.model.user.Friendship;
 import com.klaisapp.bookclub.model.user.User;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FriendshipService {
+    Optional<Friendship> findById(int friendshipId);
+    Friendship sendFriendRequest(User sender, User receiver);
+    void acceptFriendRequest(int requestId);
+    void declineFriendRequest(int requestId);
+    void declineAndDeleteFriendRequest(int requestId);
+    List<Friendship> listFriendships(User user);
+    List<Friendship> listIncomingFriendRequests(User user);
 
-    List<Friendship> findAll();
-
-    Friendship findFriendShipById(int friendshipId);
-
-    List<Friendship> findFriendshipsForUser(int userId);
-
-    FriendshipStatus determineFriendshipStatus(User loggedInUser, User profileUser);
-
-    List<Friendship> findPendingFriendshipsByReceiver(int userId, FriendshipStatus friendshipStatus);
-
-    Friendship save(Friendship friendship);
-
-    ResponseEntity<String> sendFriendRequest(User sender, User receiver);
-
+    FriendshipStatus determineFriendshipStatus(User currentUser, User otherUser);
 }
