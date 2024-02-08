@@ -10,8 +10,6 @@ Feel free to contact me through any means:
 
 ## Todo List / Currently in development:
 
-- **Friendship model**
-  -  Manage friendships between users
 - Securing endpoints
 - **Endpoint Security:** Implementing access control to secure user-specific endpoints.
   - Ensuring users can only access their own profile information.
@@ -20,6 +18,14 @@ Feel free to contact me through any means:
   - Implementing role-based access control to manage different user permissions.
   - Securing critical endpoints based on user roles.
 - Login invalid error handlers
+
+## Recently completed TODO List:
+
+- **Dynamic Friendship model**
+  - Manage friendships
+  - system supported friend system with friend requests, friend-list and a interactive system for adding friends
+  - 2-way agreement for a friendship
+  - Dynamically updated friendship statud reflected in the user interface, enhancing user interaction and engagement.
 
 ## Introduction
 
