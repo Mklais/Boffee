@@ -8,11 +8,12 @@ Feel free to contact me through any means:
 - marten.kustav@gmail.com
 - https://www.linkedin.com/in/marten-kustav-klais/
 
-## Todo List / Currently in development:
+## Currently in development:
 
-- **Friendship model**
-  -  Manage friendships between users
-- Securing endpoints
+### TODO LIST:
+
+- **Encode and store passwords in the database**
+  - Use of BCrypt
 - **Endpoint Security:** Implementing access control to secure user-specific endpoints.
   - Ensuring users can only access their own profile information.
   - Restricting unauthorized access to sensitive user data.
@@ -21,13 +22,19 @@ Feel free to contact me through any means:
   - Securing critical endpoints based on user roles.
 - Login invalid error handlers
 
+### Recently completed TODO list items:
+
+- **Dynamic Friendship model**
+  - Manage friendships 
+  - system supported friend system with friend requests, friend-list and a interactive system for adding friends 
+  - 2-way agreement for a friendship 
+  - Dynamically updated friendship statud reflected in the user interface, enhancing user interaction and engagement.
+
 ## Introduction
 
-Boffee is a web application crafted to manage and interact with user profiles within a club. 
-With its user-friendly interface, Boffee makes registration and profile management a breeze,
+Boffee is a web application crafted to manage and interact with user profiles within a club.
+With its user-friendly interface, Boffee makes registration and profile management a breeze, 
 inviting users to delve into a world of personal expression and discovery.
-
-Users & their profiles makes for a more connected and engaging community experience.
 
 ## Features
 
@@ -48,6 +55,11 @@ Users & their profiles makes for a more connected and engaging community experie
 - Review and influence
   - Reviewers can contribute by giving thoughtful reviews on books, influencing the reading choices of the community
 
+---
+- **Deletion strategies for Boffee entities**
+  - Application ensures that the deletion of entities such as authors, genres, and books does not leav orphan records or inconsistent state. Employ database cascading and application-level safeguards to:
+  - Maintain Data Integrity,
+  - Preserve User Experience,
 
 ## Technologies Used
 
