@@ -1,11 +1,11 @@
 package com.klaisapp.bookclub.aspect;
 
 import com.klaisapp.bookclub.logger.LogSubsection;
-import com.klaisapp.bookclub.model.user.User;
+import com.klaisapp.bookclub.model.User;
 import com.klaisapp.bookclub.logger.LogCategory;
 import com.klaisapp.bookclub.logger.LogMessageFormatter;
 import com.klaisapp.bookclub.logger.UserStatus;
-import com.klaisapp.bookclub.service.user.user.UserService;
+import com.klaisapp.bookclub.service.user.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
@@ -28,7 +28,7 @@ public class UserManagementLoggingAspect {
         this.userService = userService;
     }
 
-    @Around("execution(* com.klaisapp.bookclub.controller.entity.user.UserController.changeUserActiveStatus(..)) && args(username)")
+    @Around("execution(* com.klaisapp.bookclub.controller.user.UserController.changeUserActiveStatus(..)) && args(username)")
     public Object logChangeUserActiveStatus(ProceedingJoinPoint joinPoint, String username) throws Throwable {
         // Fetch user & current state
         User theUser = userService.findByUsername(username);
@@ -62,7 +62,7 @@ public class UserManagementLoggingAspect {
         return result;
     }
 
-    @After("execution(* com.klaisapp.bookclub.controller.entity.user.UserController.delete(..)) && args(theId)")
+    @After("execution(* com.klaisapp.bookclub.controller.user.UserController.delete(..)) && args(theId)")
     public void logAfterDelete(int theId) {
         String logMessage = LogMessageFormatter.format(
                 LogCategory.USER,

@@ -1,7 +1,7 @@
 package com.klaisapp.bookclub.aspect;
 
 import com.klaisapp.bookclub.logger.LogSubsection;
-import com.klaisapp.bookclub.model.user.User;
+import com.klaisapp.bookclub.model.User;
 import com.klaisapp.bookclub.logger.LogCategory;
 import com.klaisapp.bookclub.logger.LogMessageFormatter;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,7 +18,7 @@ public class UserRegistrationLoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(UserRegistrationLoggingAspect.class);
 
-    @Around("execution(* com.klaisapp.bookclub.controller.pageController.RegistrationController.processRegistration(..)) && args(user, passwordVerify, model)")
+    @Around("execution(* com.klaisapp.bookclub.security.RegistrationController.processRegistration(..)) && args(user, passwordVerify, model)")
     public Object logUserRegistration(ProceedingJoinPoint joinPoint, User user, String passwordVerify, Model model) throws Throwable {
         attemptToRegisterLog(user);
 

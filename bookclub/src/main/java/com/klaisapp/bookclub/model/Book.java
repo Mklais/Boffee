@@ -1,6 +1,5 @@
 package com.klaisapp.bookclub.model;
 
-import com.klaisapp.bookclub.model.user.UserProfile;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

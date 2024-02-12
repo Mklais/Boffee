@@ -7,6 +7,8 @@ public final class MessageConstants {
             "This entity already exists!";
     public static final String ENTITY_SAVED_SUCCESSFULLY =
             "Entity saved successfully.";
+    public static final String ENTITY_NOT_FOUND =
+            "Entity was not found!";
     public static final String USER_DUPLICATE =
             "User with this username already exists!";
     public static final String USER_TOO_FEW_REGISTERED =
