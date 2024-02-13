@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- insert data into 'user-profile' -->
+    <changeSet id="20240213-001-insert-data-into-user-profile" author="M.K.Klais" labels="seedData">
+        <sql>
+            INSERT INTO user_profile (hobbies, interests, birthdate, favorite_genre_id, favorite_author_id)
+            VALUES
+            ('Reading', 'Technology', '1990-01-15', 1, 1),
+            ('Traveling', 'Music', '1985-05-20', 2, 2),
+            ('Cooking', 'Sports', '1992-11-10', 3, 3),
+            ('Gaming', 'Movies', '1988-07-25', 4, 4),
+            ('Photography', 'Art', '1980-03-12', 5, 5),
+            ('Hiking', 'Science', '1995-09-18', 6, 6),
+            ('Painting', 'Nature', '1982-04-05', 1, 1),
+            ('Cycling', 'Reading', '1998-12-30', 2, 2);
+        </sql>
+    </changeSet>
+
+    <!-- insert data into 'users' -->
+    <changeSet id="20240213-001-insert-data-into-users" author="M.K.Klais" labels="seedData">
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="1"/>
+            <column name="username" value="Laura"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="150"/>
+            <column name="first_name" value="Laura"/>
+            <column name="last_name" value="Klais"/>
+            <column name="email" value="laura@boffee.com"/>
+            <column name="emoji" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="2"/>
+            <column name="username" value="Leslie"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="120"/>
+            <column name="first_name" value="Leslie"/>
+            <column name="last_name" value="Jones"/>
+            <column name="email" value="leslie@boffee.com"/>
+            <column name="emoji" value="2"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="3"/>
+            <column name="username" value="Mary"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="100"/>
+            <column name="first_name" value="Mary"/>
+            <column name="last_name" value="Johnson"/>
+            <column name="email" value="mary@boffee.com"/>
+            <column name="emoji" value="3"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="4"/>
+            <column name="username" value="John"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="180"/>
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Doe"/>
+            <column name="email" value="john@boffee.com"/>
+            <column name="emoji" value="4"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="5"/>
+            <column name="username" value="Alice"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="200"/>
+            <column name="first_name" value="Alice"/>
+            <column name="last_name" value="Smith"/>
+            <column name="email" value="alice@boffee.com"/>
+            <column name="emoji" value="5"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="6"/>
+            <column name="username" value="Bob"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="90"/>
+            <column name="first_name" value="Bob"/>
+            <column name="last_name" value="Johnson"/>
+            <column name="email" value="bob@boffee.com"/>
+            <column name="emoji" value="6"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="7"/>
+            <column name="username" value="Eva"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="130"/>
+            <column name="first_name" value="Eva"/>
+            <column name="last_name" value="Brown"/>
+            <column name="email" value="eva@boffee.com"/>
+            <column name="emoji" value="7"/>
+        </insert>
+        <insert tableName="users">
+            <column name="profile_id" valueNumeric="8"/>
+            <column name="username" value="Michael"/>
+            <column name="password" value="{noop}test123"/>
+            <column name="active" valueNumeric="1"/>
+            <column name="activity_points" valueNumeric="160"/>
+            <column name="first_name" value="Michael"/>
+            <column name="last_name" value="Miller"/>
+            <column name="email" value="michael@boffee.com"/>
+            <column name="emoji" value="8"/>
+        </insert>
+    </changeSet>
+
+    <!-- insert data into 'user_authorities' -->
+    <changeSet id="20240213-001-insert-user_authorities-data" author="M.K.Klais" labels="seedData">
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="authority_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="authority_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="authority_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="4"/>
+            <column name="authority_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="5"/>
+            <column name="authority_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="6"/>
+            <column name="authority_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="7"/>
+            <column name="authority_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="user_authorities">
+            <column name="user_id" valueNumeric="8"/>
+            <column name="authority_id" valueNumeric="3"/>
+        </insert>
+    </changeSet>
+
+    <!-- insert data into 'user-read-books' -->
+    <changeSet id="20240213-001-insert-data-into-user-read-books" author="M.K.Klais" labels="seedData">
+        <sql>
+            INSERT INTO user_read_books (user_profile_id, book_id) VALUES
+            (1, 1),
+            (1, 3),
+            (1, 5),
+            (1, 7),
+            (1, 9),
+            (2, 2),
+            (2, 4),
+            (2, 6),
+            (3, 1),
+            (3, 3),
+            (4, 2),
+            (4, 4),
+            (4, 8),
+            (5, 5),
+            (5, 7),
+            (5, 9),
+            (5, 11),
+            (5, 13),
+            (6, 10),
+            (6, 12),
+            (6, 14),
+            (7, 1),
+            (7, 5),
+            (7, 9),
+            (8, 2),
+            (8, 6),
+            (8, 10),
+            (8, 14),
+            (8, 15);
+        </sql>
+    </changeSet>
+
+    <!-- insert data into 'user-recommended-books' -->
+    <changeSet id="20240213-001-insert-user-recommended-books-data" author="M.K.Klais" labels="seedData">
+        <sql>
+            INSERT INTO user_recommended_books (user_profile_id, book_id) VALUES
+            (1, 5),
+            (1, 6),
+            (2, 7),
+            (2, 8),
+            (3, 1),
+            (3, 2),
+            (4, 3),
+            (4, 4),
+            (5, 9),
+            (5, 10),
+            (6, 11),
+            (6, 12),
+            (7, 13),
+            (7, 14),
+            (8, 15),
+            (8, 1);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

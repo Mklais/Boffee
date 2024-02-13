@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- insert data into 'author' -->
+    <changeSet id="20240213-001-insert-author-data" author="M.K.Klais" labels="seedData">
+        <insert tableName="author">
+            <column name="first_name" value="Jim"/>
+            <column name="last_name" value="Halpert"/>
+        </insert>
+        <insert tableName="author">
+            <column name="first_name" value="Saul"/>
+            <column name="last_name" value="Goodman"/>
+        </insert>
+        <insert tableName="author">
+            <column name="first_name" value="Sophia" />
+            <column name="last_name" value="Thomas" />
+        </insert>
+        <insert tableName="author">
+            <column name="first_name" value="William" />
+            <column name="last_name" value="Taylor" />
+        </insert>
+        <insert tableName="author">
+            <column name="first_name" value="Olivia" />
+            <column name="last_name" value="Brown" />
+        </insert>
+        <insert tableName="author">
+            <column name="first_name" value="Liam" />
+            <column name="last_name" value="Miller" />
+        </insert>
+        <insert tableName="author">
+            <column name="first_name" value="Liam" />
+            <column name="last_name" value="Miller" />
+        </insert>
+    </changeSet>
+
+    <!-- insert data into 'book' -->
+    <changeSet id="20240213-001-insert-book-data" author="M.K.Klais" labels="seedData">
+        <insert tableName="book">
+            <column name="title" value="A Guide to Workplace Prankery"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Better Call Saul: Legal Loopholes for the Morally Flexible"/>
+            <column name="author_id" value="2"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Echoes of Eternity"/>
+            <column name="author_id" value="3"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Beyond the Horizon"/>
+            <column name="author_id" value="4"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="How to Marry Your Co-Worker: Love, Laugs, and Paper"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Legal Gymnastics"/>
+            <column name="author_id" value="2"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Lost in Translation"/>
+            <column name="author_id" value="3"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="The Enchanted Garden"/>
+            <column name="author_id" value="4"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="The Art of the Swivel Chair: Spinning Through Life"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="The Silent Symphony"/>
+            <column name="author_id" value="2"/>
+        </insert>
+        <!-- Additional books -->
+        <insert tableName="book">
+            <column name="title" value="Slippin' Jimmy"/>
+            <column name="author_id" value="2"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Eternal Echoes"/>
+            <column name="author_id" value="3"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Stars Aligned"/>
+            <column name="author_id" value="4"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="Dreams Unveiled"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="book">
+            <column name="title" value="The Alibi Cookbook"/>
+            <column name="author_id" value="2"/>
+        </insert>
+    </changeSet>
+
+    <!-- insert data into 'genre' -->
+    <changeSet id="20240213-001-insert-genre-data" author="M.K.Klais" labels="seedData">
+        <insert tableName="genre">
+            <column name="name" value="Mystery"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Science Fiction"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Romance"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Fantasy"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Thriller"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Historical Fiction"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Adventure"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Biography"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Self-Help"/>
+        </insert>
+        <insert tableName="genre">
+            <column name="name" value="Dystopian"/>
+        </insert>
+    </changeSet>
+
+    <!-- insert data into 'book-genre' -->
+    <changeSet id="20240213-001-insert-book-genre-data" author="M.K.Klais" labels="seedData">
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="1"/>
+            <column name="genre_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="1"/>
+            <column name="genre_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="2"/>
+            <column name="genre_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="2"/>
+            <column name="genre_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="3"/>
+            <column name="genre_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="3"/>
+            <column name="genre_id" valueNumeric="8"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="4"/>
+            <column name="genre_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="4"/>
+            <column name="genre_id" valueNumeric="10"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="5"/>
+            <column name="genre_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="5"/>
+            <column name="genre_id" valueNumeric="9"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="6"/>
+            <column name="genre_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="6"/>
+            <column name="genre_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="7"/>
+            <column name="genre_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="7"/>
+            <column name="genre_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="8"/>
+            <column name="genre_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="9"/>
+            <column name="genre_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="10"/>
+            <column name="genre_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="10"/>
+            <column name="genre_id" valueNumeric="9"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="11"/>
+            <column name="genre_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="12"/>
+            <column name="genre_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="13"/>
+            <column name="genre_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="13"/>
+            <column name="genre_id" valueNumeric="10"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="14"/>
+            <column name="genre_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="book_genre">
+            <column name="book_id" valueNumeric="15"/>
+            <column name="genre_id" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+
+    <!-- insert data into 'reviewer' -->
+    <changeSet id="20240213-001-insert-reviewer-data" author="M.K.Klais" labels="seedData">
+        <sql>
+            INSERT INTO Reviewer (first_name, last_name)
+            VALUES
+            ('Alice', 'Anderson'),
+            ('Bob', 'Brown'),
+            ('Charlie', 'Clark'),
+            ('David', 'Davis'),
+            ('Eva', 'Evans'),
+            ('Frank', 'Fisher'),
+            ('Grace', 'Gibson'),
+            ('Henry', 'Hill'),
+            ('Ivy', 'Irwin'),
+            ('Jack', 'Jones');
+        </sql>
+    </changeSet>
+
+    <!-- insert data into 'review' -->
+    <changeSet id="20240213-001-insert-review-data" author="M.K.Klais" labels="seedData">
+        <sql>
+            INSERT INTO Review (comment, reviewer_id, book_id)
+            VALUES
+            ('A lot of great pranks and laughs!', 1, 1),
+            ('Interesting character that Saul fella, couldn''t put it down!', 2, 2),
+            ('Not my favorite, but still a good read.', 3, 3),
+            ('Highly recommend, especially for sci-fi fans.', 4, 4),
+            ('Well-written and thought-provoking.', 5, 5),
+            ('A thrilling page-turner!', 6, 6),
+            ('Captivating story with unexpected twists.', 7, 7),
+            ('The characters felt so real, couldn''t stop reading.', 8, 8),
+            ('Amazing journey through time and space.', 9, 9),
+            ('Beautifully written, left me wanting more.', 10, 10);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

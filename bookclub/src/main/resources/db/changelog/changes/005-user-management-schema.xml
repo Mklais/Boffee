@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- 'user-profile' -->
+    <changeSet id="20240213-001-create-user-profile-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE IF NOT EXISTS user_profile (
+            profile_id INT AUTO_INCREMENT PRIMARY KEY,
+            hobbies VARCHAR(255),
+            interests VARCHAR(255),
+            birthdate DATE,
+            favorite_genre_id INT,
+            favorite_author_id INT,
+            FOREIGN KEY (favorite_genre_id) REFERENCES genre(id) ON DELETE SET NULL,
+            FOREIGN KEY (favorite_author_id) REFERENCES author(id) ON DELETE SET NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        </sql>
+    </changeSet>
+
+    <!-- 'users' -->
+    <changeSet id="20240213-001-create-users-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE IF NOT EXISTS users (
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
+            profile_id INT UNIQUE,
+            username VARCHAR(50) NOT NULL,
+            password CHAR(68) NOT NULL,
+            active TINYINT NOT NULL,
+            activity_points INT NOT NULL,
+            first_name VARCHAR(255),
+            last_name VARCHAR(255),
+            email VARCHAR(255),
+            emoji VARCHAR(10),
+            UNIQUE KEY username_unique (username),
+            FOREIGN KEY (profile_id) REFERENCES user_profile(profile_id) ON DELETE CASCADE
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        </sql>
+    </changeSet>
+
+    <!-- 'user-authorities' -->
+    <changeSet id="20240213-001-create-user-authorities-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE IF NOT EXISTS user_authorities (
+            user_id INT NOT NULL,
+            authority_id INT NOT NULL,
+            PRIMARY KEY (user_id, authority_id),
+            FOREIGN KEY (user_id) REFERENCES users (user_id),
+            FOREIGN KEY (authority_id) REFERENCES authorities (authority_id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        </sql>
+    </changeSet>
+
+    <!-- 'user-read-books' -->
+    <changeSet id="20240213-001-create-user-read-books-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE IF NOT EXISTS user_read_books (
+            user_profile_id INT,
+            book_id INT,
+            PRIMARY KEY (user_profile_id, book_id),
+            FOREIGN KEY (user_profile_id) REFERENCES user_profile(profile_id),
+            FOREIGN KEY (book_id) REFERENCES book(id)
+            );
+        </sql>
+    </changeSet>
+
+    <!-- 'user-recommended-books' -->
+    <changeSet id="20240213-001-create-user-recommended-books-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE IF NOT EXISTS user_recommended_books (
+            user_profile_id INT,
+            book_id INT,
+            PRIMARY KEY (user_profile_id, book_id),
+            FOREIGN KEY (user_profile_id) REFERENCES user_profile(profile_id),
+            FOREIGN KEY (book_id) REFERENCES book(id)
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

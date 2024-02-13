@@ -1,28 +1,20 @@
 
 u
 Ebookclub/src/main/java/com/klaisapp/bookclub/BookClubApplication.java,8\b\8b49647caed705399dba3f02e99b21056463c082
-í
-bbookclub/src/main/java/com/klaisapp/bookclub/controller/pageController/RegistrationController.java,9\4\94cbbe7cf880753c7c22ba59dc2886f1e98446d2
 Å
 Qbookclub/src/main/java/com/klaisapp/bookclub/security/RegistrationController.java,4\c\4c1227705c38340c50086f689a1570a17d73649c
 {
 Kbookclub/src/main/java/com/klaisapp/bookclub/security/LogoutController.java,d\b\db5f952e2eff99adbdb6801909c94e3d61a01f95
 z
 Jbookclub/src/main/java/com/klaisapp/bookclub/security/LoginController.java,d\a\dada2af31e346654d36120161b4adaf09ef2db95
-z
-Jbookclub/src/main/java/com/klaisapp/bookclub/model/user/FriendRequest.java,a\c\ac4353b48bf8d73f7523463ecad0861b6573320f
 Ñ
 Tbookclub/src/main/java/com/klaisapp/bookclub/controller/author/AuthorController.java,6\6\6633393fe4d9a4c03e2ef40730f99f2d2dde2c1d
 m
 =bookclub/src/main/java/com/klaisapp/bookclub/model/Genre.java,a\f\afd4a7363f5967e3820b58759a668d33b6aadea6
-à
-Xbookclub/src/main/java/com/klaisapp/bookclub/service/model/author/AuthorServiceImpl.java,0\d\0d6b0c3a4c129259bb759c753fccd9d3e7ce7c0f
 Ä
 Pbookclub/src/main/java/com/klaisapp/bookclub/repository/AuthorityRepository.java,5\3\53c09f1af994b2af4bfafb9959adc8ede29237ad
 }
 Mbookclub/src/main/java/com/klaisapp/bookclub/repository/AuthorRepository.java,0\1\011b7eadd8fe1334b7f7f6d3ddff8f295afa4d77
-Ñ
-Tbookclub/src/main/java/com/klaisapp/bookclub/service/model/author/AuthorService.java,0\5\0501a9171aeb81053f1dc37a4be00743becfe0e3
 Ç
 Rbookclub/src/main/java/com/klaisapp/bookclub/service/author/AuthorServiceImpl.java,4\4\449832698dfdb031c012ef3d35360c6875d360c0
 ~
@@ -41,12 +33,8 @@ Pbookclub/src/main/java/com/klaisapp/bookclub/service/genre/GenreServiceImpl.jav
 Rbookclub/src/main/java/com/klaisapp/bookclub/service/review/ReviewServiceImpl.java,7\2\72f5ef4f1fef23760a9a5b0b4d7985f003b2737b
 Ç
 Rbookclub/src/main/java/com/klaisapp/bookclub/common/messages/MessageConstants.java,3\c\3c196c2c4f52b946eedd068e1392f52a0a112c79
-
-Obookclub/src/main/java/com/klaisapp/bookclub/service/common/MessageService.java,9\e\9e1f4337ce0d3879da6a052c065eb70e090ab8a2
 }
 Mbookclub/src/main/java/com/klaisapp/bookclub/common/messages/MessageType.java,6\9\6936962b3ce022330307f57c9a168269cfe89393
-Å
-Qbookclub/src/main/java/com/klaisapp/bookclub/common/messages/MessageCategory.java,b\d\bd3145cef4f0a3f750224bd6ac8ccdb219d2f01a
 ã
 [bookclub/src/main/java/com/klaisapp/bookclub/service/authority/AuthorityUpgradeService.java,7\1\714b56f99a4f031578f74f4294c1cbacee769d5b
 q
@@ -65,5 +53,25 @@ Ibookclub/src/main/java/com/klaisapp/bookclub/common/FriendshipStatus.java,c\f\
 ^bookclub/src/main/java/com/klaisapp/bookclub/service/authority/AuthorityControllerService.java,f\2\f21364a13a9d450c8bc41b7d929006327a4acca5
 ~
 Nbookclub/src/main/java/com/klaisapp/bookclub/service/user/UserServiceImpl.java,9\3\93de7523fc8c527d2de9c0c27cbd22dd0b6023e1
-x
-Hbookclub/src/main/java/com/klaisapp/bookclub/common/OperationResult.java,9\3\930afd70f5684df430523d353a4720ecd6ad3cf9
+@
+bookclub/pom.xml,7\4\74bcb3725152c5d8e4a11f6bfd329ce10e493112
+l
+<bookclub/sql-scripts/04_02- insert into book-genre table.sql,2\d\2d5449ee31ecfd9f522082f988275603a3b03da9
+h
+8bookclub/sql-scripts/05_01- create reviewer & review.sql,1\7\17c3057f220ec9d6b33666f3318cae9e9e78dbce
+g
+7bookclub/sql-scripts/06_01 create authorities table.sql,2\a\2a34286881855bb1142dfaafabc94c0346e2db0c
+c
+3bookclub/sql-scripts/08_01 - create users table.sql,c\b\cba9ee37bfc6f9014732fed5069eae2fe84267a7
+h
+8bookclub/sql-scripts/08_02 - insert into users table.sql,9\e\9e080cf91a29a8c68764e3a07fd700a1b2123c7b
+t
+Dbookclub/sql-scripts/11_01 - create user-recommended-books table.sql,7\b\7ba344bcc89f782eb62256d0014b244877f05527
+y
+Ibookclub/sql-scripts/11_02 - insert into user-recommended-books table.sql,4\9\49049c1b4ce200620e0b6d33fc6dba521c7592a1
+f
+6bookclub/sql-scripts/12_01 Create friendship table.sql,8\b\8b3deaa4d09f51dc4c4d64474ffa9ef1d27c5899
+k
+;bookclub/sql-scripts/12_02 Insert into friendship table.sql,c\2\c2e560c12c386404cdf77d0166d63c9accee099d
+B
+bookclub/README.md,b\9\b9cf14b82af15ee36a2161a456ab20349a50ae87

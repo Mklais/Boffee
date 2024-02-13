@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Creation and initial population of core domain schemas -->
+    <include file="changes/001-core-domain-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changes/002-core-domain-data.xml" relativeToChangelogFile="true"/>
+
+    <!-- Creation and initial population of security schemas -->
+    <include file="changes/003-security-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changes/004-security-data.xml" relativeToChangelogFile="true"/>
+
+    <!-- Creation and initial population of user management schemas -->
+    <include file="changes/005-user-management-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changes/006-user-management-data.xml" relativeToChangelogFile="true"/>
+
+    <!-- Creation and initial population of feature social schema -->
+    <include file="changes/007-feature-social-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changes/008-feature-social-data.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
