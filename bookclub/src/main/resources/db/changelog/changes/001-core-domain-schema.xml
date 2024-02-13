@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- 'author' -->
+    <changeSet id="20240213-001-create-author-table" author="M.K.Klais" labels="schema">
+        <createTable tableName="author">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="pk_author"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- 'book' -->
+    <changeSet id="20240213-001-create-book-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE book (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            author_id INT,
+            CONSTRAINT fk_author
+            FOREIGN KEY (author_id)
+            REFERENCES author(id)
+            ON DELETE CASCADE -- Cascade delete to delete associated reviews
+            );
+            CREATE INDEX idx_author ON book (author_id);
+        </sql>
+    </changeSet>
+
+    <!-- 'genre' -->
+    <changeSet id="20240213-001-create-genre-table" author="M.K.Klais" labels="schema">
+        <createTable tableName="genre">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="pk_genre"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- 'book-genre' -->
+    <changeSet id="20240213-001-create-book-genre-table" author="M.K.Klais" labels="schema">
+        <sql>
+            CREATE TABLE IF NOT EXISTS book_genre (
+            book_id INT,
+            genre_id INT,
+            PRIMARY KEY (book_id, genre_id),
+            FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE,
+            FOREIGN KEY (genre_id) REFERENCES genre (id) ON DELETE CASCADE
+            );
+        </sql>
+    </changeSet>
+
+    <!-- 'reviewer' -->
+    <changeSet id="20240213-001-create-reviewer-table" author="M.K.Klais" labels="schema">
+        <createTable tableName="reviewer">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_reviewer"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- 'review' -->
+    <changeSet id="20240213-001-create-review-table" author="M.K.Klais" labels="schema">
+        <createTable tableName="review">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_review"/>
+            </column>
+            <column name="comment" type="text"/>
+            <column name="reviewer_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_review_reviewer" references="Reviewer(id)"/>
+            </column>
+            <column name="book_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_review_book" references="Book(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

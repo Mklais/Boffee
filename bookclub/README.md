@@ -24,6 +24,8 @@ Feel free to contact me through any means:
 
 ### Recently completed TODO list items:
 
+- **Liquibase Migration**
+  - 13/02/2024
 - **Dynamic Friendship model**
   - Manage friendships 
   - system supported friend system with friend requests, friend-list and a interactive system for adding friends 
