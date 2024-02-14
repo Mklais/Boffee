@@ -10,4 +10,9 @@
     <!-- This section includes the initial schema creation and data seeding for release 1.0 -->
     <include file="db.changelog-1.0.xml" relativeToChangelogFile="true"/>
 
+    <!-- Release 2.0 Changelog -->
+    <!-- This section includes the adjusting of 'users' table in the user-management-schema category for release 2.0 -->
+    <!-- This is a change to support the implementation of password encoding -->
+    <include file="db.changelog-2.0.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

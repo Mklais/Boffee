@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- changeSet for updating an existing user's password -->
+    <changeSet id="20240214-001-adjust-user-data-user1" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Laura';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user2" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Leslie';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user3" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Mary';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user4" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'John';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user5" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Alice';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user6" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Bob';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user7" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Eva';
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240214-001-adjust-user-data-user8" author="M.K.Klais" context="passwordUpdate">
+        <sql>UPDATE users SET password = '$2a$12$2mGd9HlRHAF7anVXWruYIeO/pcTSWW1dc.IJwWvMvSXmrxyy2ZzNO'
+            WHERE username = 'Michael';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

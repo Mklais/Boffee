@@ -1,5 +1,5 @@
 # "Boffee"
-## Contact information
+## Contact information 📬
 
 Thank you for checking out my project!
 Feel free to contact me through any means:
@@ -9,13 +9,13 @@ Feel free to contact me through any means:
 - https://www.linkedin.com/in/marten-kustav-klais/
 
 
-## Introduction
+## Introduction 🎉
 
 Boffee is a web application crafted to manage and interact with user profiles within a club.
 With its user-friendly interface, Boffee makes registration and profile management a breeze, 
 inviting users to delve into a world of personal expression and discovery.
 
-## Features
+## Features ✨
 
 ### User Authentication & Registration
 - Secure login & registration system for users.
@@ -46,12 +46,9 @@ inviting users to delve into a world of personal expression and discovery.
   - Preserve User Experience
 
 
-## Currently in Development
+## Currently in Development 🛠️
 
-### TODO List
-
-- **Password Security Enhancement**
-  - Implement BCrypt for encoding and storing passwords in the database securely.
+### TODO List 📋
 
 - **Endpoint Security**
   - Implement access control to secure user-specific endpoints, ensuring users can only access their own profile information and restricting unauthorized access to sensitive data.
@@ -63,17 +60,21 @@ inviting users to delve into a world of personal expression and discovery.
 - **Improved Error Handling for Login**
   - Develop and integrate more informative error handlers for login failures to enhance user experience and troubleshooting.
 
-### Recently Completed Items
+### Recently Completed Items 🚀
 
+- [x] **Password Security Enhancement (14/02/2024)**
+  - Implement BCrypt for password hashing, significantly enhancing the security of stored passwords.
+    - Changes to database schema to support the storage of hashed passwords.
+    - Liquibase Changelog Release 2.0:
+      - Applying necessary modifications to the 'users' table without impacting the integrity of existing data.
 - [x] **Liquibase Migration (13/02/2024)**
   - Successfully integrated Liquibase to manage database schema changes effectively. This ensures seamless updates and version control for the database, facilitating easier evolution of the database schema as the application develops.
-
 - [x] **Dynamic Friendship Model**
   - Introduced a comprehensive friendship management system, supporting friend requests, a friend-list, and an interactive system for adding friends.
   - Established a two-way agreement mechanism for friendships, ensuring mutual consent.
   - Implemented dynamic updates of friendship status in the user interface, significantly enhancing user interaction and engagement within the platform.
 
-## Technologies Used
+## Technologies Used 💻
 
 The project leverages a robust stack of technologies to deliver a seamless and secure user experience:
 
@@ -98,7 +99,7 @@ The project leverages a robust stack of technologies to deliver a seamless and s
   - JavaScript: Client-side scripting.
   - Bootstrap: Frontend framework for responsive design.
 
-## Getting Started
+## Getting Started 🏁
 
 These instructions will get you a copy of the project up and running on your local machine for testing purposes.
 
@@ -143,7 +144,7 @@ It will create and populate tables.
   - un: Laura pw: test123 (authority: admin)
   - un: Mary pw: test123 (authority: reader)
 
-## Contributing
+## Contributing 🤝
 
 **Note:** This project is under development, and aspects of it may change. Your feedback is invaluable to me.
 
@@ -152,5 +153,5 @@ I welcome all forms of feedback and contributions. If you have suggestions, ques
 - **LinkedIn**: [Marten Kustav Klais](https://www.linkedin.com/in/marten-kustav-klais/)
 - **Email**: [marten.kustav@gmail.com](mailto:marten.kustav@gmail.com)
 
-I look forward to hearing from you!
+I look forward to hearing from you! 👋
 

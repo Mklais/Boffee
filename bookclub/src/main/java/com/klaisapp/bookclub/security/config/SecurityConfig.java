@@ -7,8 +7,11 @@ import com.klaisapp.bookclub.security.handlers.RegistrationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,16 +28,13 @@ public class SecurityConfig {
 
     private final LogoutSuccessHandler logoutSuccessHandler;
 
-    private final RegistrationSuccessHandler registrationSuccessHandler;
     @Autowired
     public SecurityConfig(DataSource dataSource,
                           LoginSuccessHandler loginSuccessHandler,
-                          LogoutSuccessHandler logoutSuccessHandler,
-                          RegistrationSuccessHandler registrationSuccessHandler) {
+                          LogoutSuccessHandler logoutSuccessHandler) {
         this.dataSource = dataSource;
         this.loginSuccessHandler = loginSuccessHandler;
         this.logoutSuccessHandler = logoutSuccessHandler;
-        this.registrationSuccessHandler = registrationSuccessHandler;
     }
 
     @Bean

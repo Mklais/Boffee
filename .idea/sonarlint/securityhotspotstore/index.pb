@@ -73,7 +73,21 @@ f
 6bookclub/sql-scripts/12_01 Create friendship table.sql,8\b\8b3deaa4d09f51dc4c4d64474ffa9ef1d27c5899
 k
 ;bookclub/sql-scripts/12_02 Insert into friendship table.sql,c\2\c2e560c12c386404cdf77d0166d63c9accee099d
-B
-bookclub/README.md,b\9\b9cf14b82af15ee36a2161a456ab20349a50ae87
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+€
+Pbookclub/src/main/java/com/klaisapp/bookclub/security/config/SecurityConfig.java,3\a\3abd5cd61001a8808073984991804bbd0a39a6c4
+Œ
+\bookclub/src/main/java/com/klaisapp/bookclub/service/auth/RegistrationControllerService.java,d\5\d5c656dc49f8ebab3c2fbdadcd61e34b4f1ae741
+Œ
+\bookclub/src/main/java/com/klaisapp/bookclub/service/userprofile/UserProfileServiceImpl.java,8\2\827c8006aeb16f9968bff53887c7d3a22b83fbc4
+„
+Tbookclub/src/main/java/com/klaisapp/bookclub/aspect/UserManagementLoggingAspect.java,5\2\52e93ed73422a2ce3bffcd1145c6e9672d3100fa
+}
+Mbookclub/src/main/java/com/klaisapp/bookclub/security/PasswordEncryption.java,7\4\747c4af068b72e2bb5804f6f1a28d151c927294d
+w
+Gbookclub/src/main/java/com/klaisapp/bookclub/security/SharedConfig.java,2\1\2100360d5695c7ab7006d0974470b347747fe8cc
+~
+Nbookclub/src/main/java/com/klaisapp/bookclub/security/config/SharedConfig.java,5\e\5e9e89850f2db08fdb0b48a789c1ef26d46b7252
+‡
+Wbookclub/src/main/java/com/klaisapp/bookclub/security/config/PasswordEncoderConfig.java,f\f\ff1342a53bc48a0e2e4060a8ed0680213ecb60c8

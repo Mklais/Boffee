@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,13 +26,17 @@ public class UserServiceImpl implements UserService {
 
     private final AuthorityRepository authorityRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     private final int DEFAULT_AUTHORITY_INDEX = 3;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           AuthorityRepository authorityRepository) {
+                           AuthorityRepository authorityRepository,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -84,7 +89,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(User user, UserProfile userProfile) {
-        user.setPassword("{noop}" + user.getPassword());
+        // Encode password before saving it
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
         user.setActive(1);
         user.setActivityPoints(0);
         user.setEmoji("1");

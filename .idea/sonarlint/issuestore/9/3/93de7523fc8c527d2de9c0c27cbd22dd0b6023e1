@@ -1,8 +1,8 @@
 
-`	java:S112q"FDefine and throw a dedicated exception instead of using a generic one.(Ó´ìÖúÿÿÿÿ
-a	java:S112Ž"FDefine and throw a dedicated exception instead of using a generic one.(Ó´ìÖúÿÿÿÿ
-x
-java:S1192)"bDefine a constant instead of duplicating this literal "Did not find user with username: " 3 times.(ÜÄ¬
-w	java:S116"bRename this field "DEFAULT_AUTHORITY_INDEX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Á‰¦
-7
-java:S1170"!Make this final field static too.(¿Á‰¦
+g	java:S112y"FDefine and throw a dedicated exception instead of using a generic one.(Ó´ìÖúÿÿÿÿ8Ü°ã¸Ú1
+h	java:S112–"FDefine and throw a dedicated exception instead of using a generic one.(Ó´ìÖúÿÿÿÿ8Ü°ã¸Ú1
+
+java:S1192."bDefine a constant instead of duplicating this literal "Did not find user with username: " 3 times.(ÜÄ¬8Ý°ã¸Ú1
+~	java:S116"bRename this field "DEFAULT_AUTHORITY_INDEX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Á‰¦8ö°ã¸Ú1
+>
+java:S1170"!Make this final field static too.(¿Á‰¦8÷°ã¸Ú1

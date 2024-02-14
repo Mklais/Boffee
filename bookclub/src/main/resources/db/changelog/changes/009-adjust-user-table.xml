@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- changeset for updating users table -->
+    <changeSet id="20240214-001-adjust-users-table" author="M.K.Klais" labels="security-enhancements">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="users" columnName="password"/>
+        </preConditions>
+        <sql>ALTER TABLE `users` MODIFY COLUMN `password` VARCHAR(255) NOT NULL;</sql>
+    </changeSet>
+
+</databaseChangeLog>

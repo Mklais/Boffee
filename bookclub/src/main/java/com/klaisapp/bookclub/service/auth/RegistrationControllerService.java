@@ -44,9 +44,7 @@ public class RegistrationControllerService {
     }
 
     private void createUserAssociatedPersonalProfile(User user) {
-        // Creation of a new user-profile class and assigning it to the user
         UserProfile userProfile = new UserProfile();
-        // Creation of user & and saving it
         userService.registerUser(user, userProfile);
         userProfileService.registerNewProfile(userProfile, user);
     }
