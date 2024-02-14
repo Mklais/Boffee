@@ -75,3 +75,5 @@ k
 ;bookclub/sql-scripts/12_02 Insert into friendship table.sql,c\2\c2e560c12c386404cdf77d0166d63c9accee099d
 B
 bookclub/README.md,b\9\b9cf14b82af15ee36a2161a456ab20349a50ae87
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
