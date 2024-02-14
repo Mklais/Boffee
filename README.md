@@ -126,6 +126,7 @@ ensure that your database state matches what Liquibase would set up to avoid dis
 ##### 2. Create a new database
    - This can be done with the provided script in the project folder.
      - 'sql-database-setup' -> '00_00 - create-database.sql'
+   - Or just create a new schema in the workbench.
 ##### 3. Configure application properties
    - Navigate to 'src/main/resources/application.properties' file
    - Update this file with your MySQL database connection details, including the database name, username, and password.
@@ -151,5 +152,5 @@ I welcome all forms of feedback and contributions. If you have suggestions, ques
 - **LinkedIn**: [Marten Kustav Klais](https://www.linkedin.com/in/marten-kustav-klais/)
 - **Email**: [marten.kustav@gmail.com](mailto:marten.kustav@gmail.com)
 
-I look forward to hearing from you! =)
+I look forward to hearing from you!
 
